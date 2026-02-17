@@ -1,0 +1,14 @@
+# Keep this repository scoped to Exutoire project files.
+/*
+!/.gitignore
+!/LICENSE
+
+!/Documents/
+/Documents/*
+!/Documents/Projets/
+/Documents/Projets/*
+!/Documents/Projets/exutoire/
+!/Documents/Projets/exutoire/**
+
+# Local temporary backup created during remote merge.
+/LICENSE.local-backup
