@@ -1,0 +1,13 @@
+{
+  "name": "exutoire",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "license": "Apache-2.0",
+  "scripts": {
+    "dev": "python3 -m http.server 5173",
+    "build": "node scripts/inject-version.mjs",
+    "verify:mvp": "node scripts/verify-mvp.mjs",
+    "verify:a11y": "node scripts/verify-a11y.mjs"
+  }
+}
