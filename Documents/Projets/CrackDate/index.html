@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-06+Ty+Y5bIARMWAg4iwIMbfgj3siaugqzyENe/pAx1U='; style-src 'self' 'unsafe-inline' https://fonts.bunny.net; font-src 'self' https://fonts.bunny.net; img-src 'self' data: https://crackdate.app; connect-src 'self' https://api.pwnedpasswords.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; upgrade-insecure-requests">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Évaluez la résistance de votre mot de passe face à 10 types d'attaques et 6 algorithmes de hachage. Analyse instantanée, locale et sécurisée.">
+  <meta name="keywords" content="password strength, password checker, password security, mot de passe, craquage, sécurité">
+  <meta name="author" content="CrackDate">
+  <meta name="robots" content="index, follow">
+  <meta name="language" content="French, English">
+  <link rel="preconnect" href="https://fonts.bunny.net" crossorigin>
+  <link rel="preconnect" href="https://api.pwnedpasswords.com" crossorigin>
+  <link rel="preload" href="https://fonts.bunny.net/css?family=dm-mono:400,500|outfit:300,400,600,700,800&display=swap" as="style">
+  <link rel="stylesheet" href="https://fonts.bunny.net/css?family=dm-mono:400,500|outfit:300,400,600,700,800&display=swap">
+  <link rel="prefetch" href="https://api.pwnedpasswords.com/range/00000" as="fetch" crossorigin>
+  <link rel="canonical" href="https://crackdate.app/">
+  <link rel="alternate" hreflang="en" href="https://crackdate.app/?lang=en">
+  <link rel="alternate" hreflang="fr" href="https://crackdate.app/?lang=fr">
+  <link rel="alternate" hreflang="x-default" href="https://crackdate.app/">
+  <meta property="og:title" content="CrackDate — Quand votre mot de passe sera-t-il craqué?">
+  <meta property="og:description" content="Testez votre mot de passe contre 10 types d'attaques. Analyse locale, rapide et sécurisée.">
+  <meta property="og:image" content="https://crackdate.app/og-image.png">
+  <meta property="og:url" content="https://crackdate.app/">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="CrackDate — Password Security Checker">
+  <meta name="twitter:description" content="Test your password against 10 attack types. Fast, local, secure analysis.">
+   <meta name="twitter:image" content="https://crackdate.app/og-image.png">
+    <title>CrackDate — Quand votre mot de passe sera-t-il craqué ?</title>
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="shortcut icon" href="favicon.ico">
+    <script type="application/ld+json">
+   {
+     "@context": "https://schema.org",
+     "@type": "WebApplication",
+     "name": "CrackDate",
+     "description": "Test your password against 10 attack types and 6 hashing algorithms. Local, instant, secure analysis.",
+     "url": "https://crackdate.app",
+     "applicationCategory": "SecurityApplication",
+     "offers": {
+       "@type": "Offer",
+       "price": "0",
+       "priceCurrency": "USD"
+     },
+     "author": {
+       "@type": "Organization",
+       "name": "CrackDate"
+     },
+     "datePublished": "2024-01-01",
+     "inLanguage": ["en", "fr"],
+     "isAccessibleForFree": true
+   }
+   </script>
+     <link rel="stylesheet" href="styles.css">
+
+</head>
+<body>
+  <a href="#main-content" class="skip-link" data-i18n="skip">Skip to content</a>
+
+  <header role="banner">
+    <div class="lang-switch" role="group" aria-label="Language">
+      <button type="button" data-lang="en" class="active" aria-pressed="true">EN</button>
+      <button type="button" data-lang="fr" aria-pressed="false">FR</button>
+      <button type="button" data-lang="es" aria-pressed="false">ES</button>
+      <button type="button" data-lang="pt" aria-pressed="false">PT</button>
+      <button type="button" data-lang="de" aria-pressed="false">DE</button>
+      <button type="button" data-lang="tr" aria-pressed="false">TR</button>
+      <button type="button" data-lang="it" aria-pressed="false">IT</button>
+      <button type="button" data-lang="pl" aria-pressed="false">PL</button>
+      <button type="button" data-lang="nl" aria-pressed="false">NL</button>
+    </div>
+    <div class="logo" aria-label="CrackDate">
+        <svg class="logo-icon" width="32" height="32" viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+         <rect x="10" y="24" width="36" height="26" rx="4" fill="#1E1E22" stroke="#ff6600" stroke-width="2.5"/>
+         <path d="M18 24V18C18 12.477 22.477 8 28 8C33.523 8 38 12.477 38 18V24" stroke="#E8E6E3" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+         <circle cx="28" cy="37" r="9" stroke="#ff6600" stroke-width="1.5" fill="none" opacity="0.4"/>
+         <line x1="28" y1="37" x2="28" y2="31" stroke="#ff6600" stroke-width="2" stroke-linecap="round"/>
+         <line x1="28" y1="37" x2="33" y2="37" stroke="#ff6600" stroke-width="2" stroke-linecap="round"/>
+         <circle cx="28" cy="37" r="1.5" fill="#ff6600"/>
+         <path d="M28 2L25 12L30 11L26 22" stroke="#E84855" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+         <line x1="28" y1="29" x2="28" y2="30" stroke="#ff6600" stroke-width="1" opacity="0.5"/>
+         <line x1="28" y1="44" x2="28" y2="45" stroke="#ff6600" stroke-width="1" opacity="0.5"/>
+         <line x1="19.5" y1="37" x2="20.5" y2="37" stroke="#ff6600" stroke-width="1" opacity="0.5"/>
+         <line x1="35.5" y1="37" x2="36.5" y2="37" stroke="#ff6600" stroke-width="1" opacity="0.5"/>
+      </svg>
+       <h1><span>Crack</span>Date</h1>
+     </div>
+   </header>
+
+    <main id="main-content" role="main">
+      <p id="app-description" class="app-description" data-i18n-html="appDescription"></p>
+      <section class="input-section">
+        <label for="password-input" data-i18n="inputLabel">Enter a password to test</label>
+      <div id="vuln-tags" class="vuln-tags" aria-live="polite"></div>
+
+      <div id="hibp-banner" class="hibp-banner" role="alert" aria-live="assertive" hidden>
+        <div class="hibp-icon" aria-hidden="true">⚠</div>
+        <div class="hibp-content">
+          <strong class="hibp-title" data-i18n="hibpTitle">This password has been leaked!</strong>
+          <p class="hibp-text" data-i18n-html="hibpText">This password appears <strong id="hibp-count">—</strong> times in data breaches indexed by
+            <a href="https://haveibeenpwned.com/Passwords" target="_blank" rel="noopener">Have I Been Pwned</a>.
+            It is strongly recommended not to use it.</p>
+          <p class="hibp-privacy" data-i18n-html="hibpPrivacy">Verified via <a href="https://haveibeenpwned.com/API/v3#SearchingPwnedPasswordsByRange" target="_blank" rel="noopener">k-anonymity</a>: only the first 5 characters of the SHA-1 hash are sent. Your full password never leaves your browser.</p>
+        </div>
+      </div>
+
+      <div id="hibp-safe" class="hibp-safe" role="status" aria-live="polite" hidden>
+        <span class="hibp-safe-icon" aria-hidden="true">✓</span>
+        <span data-i18n="hibpSafe">This password does not appear in any known breach from Have I Been Pwned.</span>
+      </div>
+
+      <div id="hibp-error" class="hibp-error" role="alert" aria-live="assertive" hidden>
+        <span class="hibp-error-icon" aria-hidden="true">⚠</span>
+        <span data-i18n="hibpError">Could not verify against Have I Been Pwned (network issue).</span>
+      </div>
+
+      <div class="strength-bar-wrapper" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" aria-label="Password strength">
+        <div class="bar-label">
+          <span data-i18n="weak">Weak</span><span id="strength-label">—</span><span data-i18n="strong">Strong</span>
+        </div>
+        <div class="strength-bar-track"><div class="strength-bar-fill" id="strength-bar"></div></div>
+      </div>
+
+       <div class="details-grid live-details" id="live-details" role="list" aria-label="Live analysis" aria-live="polite" hidden>
+         <div class="detail-item" role="listitem"><div class="detail-value" id="detail-length">—</div><div class="detail-label" data-i18n="chars">Characters</div></div>
+         <div class="detail-item" role="listitem"><div class="detail-value" id="detail-charset">—</div><div class="detail-label" data-i18n="charsetSize">Charset size</div></div>
+         <div class="detail-item" role="listitem"><div class="detail-value" id="detail-entropy">—</div><div class="detail-label" data-i18n="entropyBits">Entropy bits</div></div>
+         <div class="detail-item" role="listitem"><div class="detail-value" id="detail-combos">—</div><div class="detail-label" data-i18n="combos">Combinations</div></div>
+         <div class="detail-item" role="listitem"><div class="detail-status" id="detail-status">—</div><div class="detail-label" data-i18n="status">Status</div></div>
+       </div>
+       <div class="password-wrapper-row">
+         <div class="password-wrapper">
+            <input type="password" id="password-input" autocomplete="off" spellcheck="false"
+                   aria-describedby="password-hint" data-i18n-placeholder="inputPlaceholder" placeholder="Entrez un mot de passe à tester">
+           <button type="button" id="toggle-visibility" data-i18n="show" aria-label="Show password">
+             <svg class="lucide lucide-eye" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+             <span data-i18n="show">Show</span>
+           </button>
+         </div>
+         <button type="button" id="reset-btn" class="reset-btn-inline" aria-label="Reset">
+           <svg class="lucide lucide-rotate-ccw" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"/></svg>
+           <span data-i18n="reset">Reset</span>
+         </button>
+       </div>
+       
+        <div class="controls-row">
+          <span class="hint" id="password-hint">
+            <svg class="lucide lucide-info" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
+            <span id="hint-text" data-i18n-html="hint"></span>
+          </span>
+        </div>
+     </section>
+
+    <div class="results" id="results" aria-live="polite" aria-atomic="true">
+      <div class="result-cards-row">
+        <div class="result-card result-card--danger">
+          <div class="card-badge card-badge--danger" data-i18n="badgeFast">Fastest crack</div>
+          <div class="label" id="result-label-fast">—</div>
+          <div class="big-duration" id="crack-duration-fast">—</div>
+          <div class="label label-on" data-i18n="on">On</div>
+          <div class="big-date" id="crack-date-fast">—</div>
+          <p class="result-sentence" id="result-sentence-fast"></p>
+        </div>
+        <div class="result-card result-card--safe">
+          <div class="card-badge card-badge--safe" data-i18n="badgeSlow">Slowest crack</div>
+          <div class="label" id="result-label-slow">—</div>
+          <div class="big-duration big-duration--safe" id="crack-duration-slow">—</div>
+          <div class="label label-on" data-i18n="on">On</div>
+          <div class="big-date" id="crack-date-slow">—</div>
+          <p class="result-sentence" id="result-sentence-slow"></p>
+        </div>
+      </div>
+
+        <details class="attack-table-wrapper">
+          <summary data-i18n="tableCaption">Crack time by attack type and hashing algorithm
+            <svg class="lucide lucide-chevron-down" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+          </summary>
+         <table class="attack-table" id="attack-table">
+           <thead>
+             <tr>
+               <th scope="col" data-i18n="thAttack">Attack type</th>
+               <th scope="col" data-i18n="thAlgo">Algorithm</th>
+               <th scope="col" data-i18n="thSpeed">Speed (12 GPU)</th>
+               <th scope="col" data-i18n="thTime">Estimated time</th>
+             </tr>
+           </thead>
+           <tbody id="attack-tbody"></tbody>
+         </table>
+       </details>
+
+      </div>
+    </div>
+
+    <section class="methodology" aria-labelledby="method-heading">
+      <h2 id="method-heading" data-i18n="methTitle">Methodology and sources</h2>
+      <div id="meth-content" data-i18n-html="methContent">
+        <h3>10 attack types modeled</h3>
+        <p><strong>1. Brute force</strong> — exhaustive search of all combinations. <strong>2. Dictionary</strong> — testing ~14 billion known leaked credentials. <strong>3. Hybrid</strong> — dictionary + hashcat mutation rules (~1,000 variants/word). <strong>4. Mask</strong> — targets predictable human structures. <strong>5. Rainbow table</strong> — instant lookup on unsalted hashes. <strong>6. Credential stuffing</strong> — reuse of leaked credential pairs. <strong>7. Password spraying</strong> — common passwords across many accounts. <strong>8. Markov/probabilistic</strong> — prioritizes statistically likely sequences. <strong>9. PCFG</strong> — models grammatical password structure. <strong>10. Combinator</strong> — concatenates words from two dictionaries.</p>
+        <h3>6 hashing algorithms compared</h3>
+        <p>Hashcat speeds on 12× NVIDIA RTX 4090: MD5 ~2,000 GH/s, SHA-1 ~610 GH/s, SHA-256 ~272 GH/s, NTLM ~2,000 GH/s, bcrypt (cost 5) ~71 kH/s, Argon2id ~800 H/s.</p>
+        <h3>Limitations</h3>
+        <p>A state-level or cloud attacker could be 10–1,000× faster. Phishing, keyloggers, SIM swapping, and social engineering bypass password strength entirely.</p>
+      </div>
+      <ul class="source-list">
+        <li><strong>Wheeler, D. (2016). "zxcvbn: Low-Budget Password Strength Estimation"</strong>USENIX Security '16 — peer-reviewed.<br><a href="https://www.usenix.org/conference/usenixsecurity16/technical-sessions/presentation/wheeler" target="_blank" rel="noopener">usenix.org</a></li>
+        <li><strong>Hive Systems — Password Table 2025</strong>Hashcat benchmarks 12× RTX 4090, bcrypt.<br><a href="https://www.hivesystems.com/blog/are-your-passwords-in-the-green" target="_blank" rel="noopener">hivesystems.com</a></li>
+        <li><strong>Kaspersky (2024). 193M passwords study</strong>45% cracked in &lt; 1 min.<br><a href="https://securelist.com/password-brute-force-time/112984/" target="_blank" rel="noopener">securelist.com</a></li>
+        <li><strong>Saputra et al. (2025). "Password Strength Study Using Zxcvbn…"</strong>Pilar Nusa Mandiri, Vol. 21 No. 1.<br><a href="https://www.researchgate.net/publication/389902836" target="_blank" rel="noopener">ResearchGate</a></li>
+        <li><strong>Hashcat Benchmarks RTX 4090 (Chick3nman)</strong><br><a href="https://gist.github.com/Chick3nman/32e662a5bb63bc4f51b847bb422222fd" target="_blank" rel="noopener">GitHub Gist</a></li>
+        <li><strong>Have I Been Pwned (Troy Hunt)</strong>14B+ compromised credentials.<br><a href="https://haveibeenpwned.com/" target="_blank" rel="noopener">haveibeenpwned.com</a></li>
+      </ul>
+    </section>
+  </main>
+
+   <footer role="contentinfo">
+     <p data-i18n-html="footer">No password is stored. Calculation runs in your browser. Only network request: the first 5 characters of the SHA-1 hash are sent to the <a href="https://haveibeenpwned.com/API/v3#SearchingPwnedPasswordsByRange" target="_blank" rel="noopener">Have I Been Pwned</a> API (k-anonymity).</p>
+     <p class="footer-note">Made with 🍫 in Brussels</p>
+   </footer>
+  <script src="app.js" defer></script>
+</body>
+</html>
