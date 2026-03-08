@@ -948,17 +948,37 @@ main {
   background: var(--surface);
   border: 1.5px solid var(--border);
   border-radius: var(--radius);
-  padding: 2rem;
   margin-top: 2.5rem;
   box-shadow: var(--shadow-sm);
+  overflow: hidden;
 }
-.methodology h2 {
+.methodology-summary {
   font-size: 1.2rem;
   font-weight: 800;
-  margin-bottom: 1.3rem;
+  padding: 2rem;
   text-transform: uppercase;
   letter-spacing: 0.1em;
   color: var(--text);
+  cursor: pointer;
+  user-select: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  transition: background-color 0.25s ease;
+}
+.methodology-summary:hover {
+  background-color: var(--surface-alt);
+}
+.methodology-summary::marker {
+  color: var(--accent);
+}
+.methodology[open] .methodology-summary {
+  border-bottom: 1.5px solid var(--border);
+  padding-bottom: 1.5rem;
+}
+.methodology > div,
+.methodology > ul {
+  padding: 0 2rem 2rem 2rem;
 }
 .methodology h3 {
   font-size: 0.9rem;
