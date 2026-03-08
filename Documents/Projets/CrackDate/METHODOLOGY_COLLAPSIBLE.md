@@ -86,7 +86,24 @@ color: var(--text);
 cursor: pointer; /* Shows it's clickable */
 user-select: none; /* Prevents text selection */
 display: flex; /* For alignment */
+justify-content: space-between; /* Chevron at right */
+align-items: center;
 transition: background-color 0.25s ease;
+list-style: none; /* Hide native triangle */
+```
+
+### `.methodology-summary svg`
+
+```css
+flex-shrink: 0; /* Prevent shrinking */
+color: var(--accent); /* Orange color */
+transition: transform 0.3s ease; /* Smooth rotation */
+```
+
+### `.methodology[open] .methodology-summary svg`
+
+```css
+transform: rotate(180deg); /* Rotate when expanded */
 ```
 
 ### `.methodology-summary:hover`
@@ -128,13 +145,16 @@ color: var(--accent); /* Orange triangle color */
 ```html
 <summary class="methodology-summary" data-i18n="methTitle">
   Methodology and sources
+  <svg class="lucide lucide-chevron-down" ...>...</svg>
 </summary>
 ```
 
 **Features:**
 
 - Uses `data-i18n="methTitle"` for translations
-- Native `<summary>` with browser disclosure triangle (▶)
+- Chevron-down icon positioned at right (same as attack table)
+- Native disclosure triangle hidden with `list-style: none`
+- Chevron rotates 180° when expanded
 - Styled with custom CSS for consistency
 
 ### Content
@@ -152,11 +172,15 @@ color: var(--accent); /* Orange triangle color */
 
 ## Styling Details
 
-### Disclosure Triangle
+### Chevron Icon
 
-- **Default:** Gray (browser default)
-- **Applied:** Orange (`--accent` color)
-- **Style:** Uses `::marker` pseudo-element
+- **Icon:** Chevron-down (same as attack table)
+- **Default state:** Pointing down (▼)
+- **Expanded state:** Rotated 180° (▲)
+- **Color:** Orange (`--accent` color)
+- **Position:** Right side of summary text
+- **Transition:** Smooth 0.3s rotate animation
+- **Native triangle:** Hidden with `list-style: none`
 
 ### Hover State
 
@@ -270,18 +294,22 @@ feat: convert methodology section to collapsible details/summary
 
 ## Comparison: Attack Table vs Methodology
 
-Both now use `<details>/<summary>` for consistency:
+Both now use `<details>/<summary>` with identical chevron styling:
 
-| Feature       | Attack Table  | Methodology         |
-| ------------- | ------------- | ------------------- |
-| Element       | `<details>`   | `<details>`         |
-| Header        | `<summary>`   | `<summary>`         |
-| Icon          | Chevron       | Disclosure triangle |
-| Default state | Collapsed     | Collapsed           |
-| Content       | Attack matrix | Sources and info    |
-| Styling       | Custom        | Custom              |
+| Feature       | Attack Table   | Methodology              |
+| ------------- | -------------- | ------------------------ |
+| Element       | `<details>`    | `<details>`              |
+| Header        | `<summary>`    | `<summary>`              |
+| Icon          | Chevron-down   | Chevron-down (identical) |
+| Icon color    | Orange         | Orange                   |
+| Icon position | Right          | Right                    |
+| Rotation      | 180° when open | 180° when open           |
+| Default state | Collapsed      | Collapsed                |
+| Content       | Attack matrix  | Sources and info         |
+| Transition    | 0.3s           | 0.3s                     |
+| Styling       | Consistent     | Consistent               |
 
-This creates a consistent collapsible pattern throughout the app.
+This creates a **consistent collapsible pattern** throughout the app with identical visual behavior.
 
 ---
 
