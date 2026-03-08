@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta
       http-equiv="Content-Security-Policy"
-      content="default-src 'self'; script-src 'self' 'sha256-06+Ty+Y5bIARMWAg4iwIMbfgj3siaugqzyENe/pAx1U='; style-src 'self' 'unsafe-inline' https://fonts.bunny.net; font-src 'self' https://fonts.bunny.net; img-src 'self' data: https://crackdate.app; connect-src 'self' https://api.pwnedpasswords.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; upgrade-insecure-requests"
+      content="default-src 'self'; script-src 'self' 'sha256-06+Ty+Y5bIARMWAg4iwIMbfgj3siaugqzyENe/pAx1U='; style-src 'self' 'unsafe-inline' https://fonts.bunny.net; font-src 'self' https://fonts.bunny.net; img-src 'self' data: https://time2crack.eu https://www.time2crack.eu; connect-src 'self' https://api.pwnedpasswords.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; upgrade-insecure-requests"
     />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta
@@ -16,7 +16,15 @@
       content="password strength, password checker, password security, mot de passe, craquage, sécurité"
     />
     <meta name="author" content="Time2Crack" />
-    <meta name="robots" content="index, follow" />
+    <meta
+      name="robots"
+      content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1"
+    />
+    <meta
+      name="googlebot"
+      content="index, follow, max-snippet:-1, max-image-preview:large"
+    />
+    <meta name="theme-color" content="#0c0c0e" />
     <meta
       name="language"
       content="French, English, Spanish, Portuguese, German, Turkish, Italian, Polish, Dutch"
@@ -38,20 +46,38 @@
       as="fetch"
       crossorigin
     />
-    <link rel="canonical" href="https://crackdate.app/" />
-    <link rel="alternate" hreflang="en" href="https://crackdate.app/?lang=en" />
-    <link rel="alternate" hreflang="fr" href="https://crackdate.app/?lang=fr" />
-    <link rel="alternate" hreflang="x-default" href="https://crackdate.app/" />
+    <link rel="canonical" href="https://time2crack.eu/" />
+    <link rel="alternate" hreflang="x-default" href="https://time2crack.eu/" />
+    <link rel="alternate" hreflang="en" href="https://time2crack.eu/?lang=en" />
+    <link rel="alternate" hreflang="fr" href="https://time2crack.eu/?lang=fr" />
+    <link rel="alternate" hreflang="es" href="https://time2crack.eu/?lang=es" />
+    <link rel="alternate" hreflang="pt" href="https://time2crack.eu/?lang=pt" />
+    <link rel="alternate" hreflang="de" href="https://time2crack.eu/?lang=de" />
+    <link rel="alternate" hreflang="tr" href="https://time2crack.eu/?lang=tr" />
+    <link rel="alternate" hreflang="it" href="https://time2crack.eu/?lang=it" />
+    <link rel="alternate" hreflang="pl" href="https://time2crack.eu/?lang=pl" />
+    <link rel="alternate" hreflang="nl" href="https://time2crack.eu/?lang=nl" />
+    <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
     <meta
       property="og:title"
       content="Time2Crack — Quand votre mot de passe sera-t-il craqué?"
     />
+    <meta property="og:site_name" content="Time2Crack" />
+    <meta property="og:locale" content="fr_FR" />
+    <meta property="og:locale:alternate" content="en_US" />
+    <meta property="og:locale:alternate" content="es_ES" />
+    <meta property="og:locale:alternate" content="pt_PT" />
+    <meta property="og:locale:alternate" content="de_DE" />
+    <meta property="og:locale:alternate" content="tr_TR" />
+    <meta property="og:locale:alternate" content="it_IT" />
+    <meta property="og:locale:alternate" content="pl_PL" />
+    <meta property="og:locale:alternate" content="nl_NL" />
     <meta
       property="og:description"
       content="Testez votre mot de passe contre 10 types d'attaques. Analyse locale, rapide et sécurisée."
     />
-    <meta property="og:image" content="https://crackdate.app/og-image.png" />
-    <meta property="og:url" content="https://crackdate.app/" />
+    <meta property="og:image" content="https://time2crack.eu/favicon.svg" />
+    <meta property="og:url" content="https://time2crack.eu/" />
     <meta property="og:type" content="website" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta
@@ -62,7 +88,7 @@
       name="twitter:description"
       content="Test your password against 10 attack types. Fast, local, secure analysis."
     />
-    <meta name="twitter:image" content="https://crackdate.app/og-image.png" />
+    <meta name="twitter:image" content="https://time2crack.eu/favicon.svg" />
     <title>Time2Crack — Quand votre mot de passe sera-t-il craqué ?</title>
     <link rel="icon" type="image/svg+xml" href="favicon.svg" />
     <link rel="icon" type="image/x-icon" href="favicon.ico" />
@@ -70,23 +96,44 @@
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
-        "@type": "WebApplication",
-        "name": "Time2Crack",
-        "description": "Test your password against 10 attack types and 6 hashing algorithms. Local, instant, secure analysis.",
-        "url": "https://crackdate.app",
-        "applicationCategory": "SecurityApplication",
-        "offers": {
-          "@type": "Offer",
-          "price": "0",
-          "priceCurrency": "USD"
-        },
-        "author": {
-          "@type": "Organization",
-          "name": "Time2Crack"
-        },
-        "datePublished": "2024-01-01",
-        "inLanguage": ["en", "fr"],
-        "isAccessibleForFree": true
+        "@graph": [
+          {
+            "@type": "WebSite",
+            "name": "Time2Crack",
+            "url": "https://time2crack.eu/",
+            "inLanguage": ["en", "fr", "es", "pt", "de", "tr", "it", "pl", "nl"]
+          },
+          {
+            "@type": "SoftwareApplication",
+            "name": "Time2Crack",
+            "applicationCategory": "SecurityApplication",
+            "applicationSubCategory": "Password Strength Checker",
+            "operatingSystem": "Web Browser",
+            "description": "Privacy-first password strength checker that estimates crack time locally in your browser.",
+            "url": "https://time2crack.eu/",
+            "offers": {
+              "@type": "Offer",
+              "price": "0",
+              "priceCurrency": "EUR"
+            },
+            "publisher": {
+              "@type": "Organization",
+              "name": "Time2Crack"
+            },
+            "inLanguage": [
+              "en",
+              "fr",
+              "es",
+              "pt",
+              "de",
+              "tr",
+              "it",
+              "pl",
+              "nl"
+            ],
+            "isAccessibleForFree": true
+          }
+        ]
       }
     </script>
     <link rel="stylesheet" href="styles.css" />
