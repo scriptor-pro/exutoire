@@ -965,12 +965,21 @@ main {
   align-items: center;
   justify-content: space-between;
   transition: background-color 0.25s ease;
+  list-style: none;
 }
 .methodology-summary:hover {
   background-color: var(--surface-alt);
 }
 .methodology-summary::marker {
   color: var(--accent);
+}
+.methodology-summary svg {
+  flex-shrink: 0;
+  color: var(--accent);
+  transition: transform 0.3s ease;
+}
+.methodology[open] .methodology-summary svg {
+  transform: rotate(180deg);
 }
 .methodology[open] .methodology-summary {
   border-bottom: 1.5px solid var(--border);
