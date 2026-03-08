@@ -7,7 +7,7 @@
 
 ## Summary
 
-All yellow accent colors in CrackDate have been replaced with a vibrant orange (#ff6600) for better visual impact and distinction.
+All yellow accent colors in Time2Crack have been replaced with a vibrant orange (#ff6600) for better visual impact and distinction.
 
 ---
 
