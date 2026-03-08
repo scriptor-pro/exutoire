@@ -673,7 +673,7 @@ main {
 
 .result-cards-row {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr;
   gap: 0.75rem;
   margin-bottom: 1rem;
 }
@@ -683,6 +683,7 @@ main {
   border-width: 2px;
   flex: 1;
   min-height: 280px;
+  width: 100%;
 }
 .result-card--safe {
   display: none;
