@@ -1173,6 +1173,15 @@ footer a:hover {
   color: var(--accent-hover);
 }
 
+@media (max-width: 920px) {
+  .details-grid {
+    grid-template-columns: repeat(3, minmax(120px, 1fr));
+  }
+  .result-sentence {
+    font-size: 0.9rem;
+  }
+}
+
 @media (max-width: 860px) {
   .result-cards-row {
     grid-template-columns: 1fr;
@@ -1182,9 +1191,27 @@ footer a:hover {
   }
 }
 
+@media (max-width: 720px) {
+  .attack-table {
+    font-size: 0.82rem;
+  }
+  .attack-table caption {
+    font-size: 0.92rem;
+    padding: 0.9rem 1rem;
+  }
+  .attack-table th {
+    font-size: 0.68rem;
+    padding: 0.75rem 0.85rem;
+  }
+  .attack-table td {
+    padding: 0.7rem 0.85rem;
+    font-size: 0.82rem;
+  }
+}
+
 @media (max-width: 600px) {
   header {
-    padding: 0.9rem 1.5rem 0.7rem;
+    padding: 0.9rem 1rem 0.7rem;
   }
   header h1 {
     font-size: clamp(1.35rem, 4.2vw, 1.85rem);
@@ -1252,6 +1279,16 @@ footer a:hover {
     padding: 0.85rem 0.6rem;
     min-height: 90px;
   }
+  .password-wrapper input {
+    font-size: 1.2rem;
+    padding: 0.85rem 0.9rem;
+    min-height: 54px;
+  }
+  .password-wrapper button,
+  .password-wrapper-row .reset-btn-inline {
+    min-height: 54px;
+    width: 54px;
+  }
   .password-wrapper-row {
     flex-direction: column;
     gap: 0.5rem;
@@ -1260,7 +1297,6 @@ footer a:hover {
     width: 100%;
   }
   .password-wrapper-row .reset-btn-inline {
-    width: 62px;
     align-self: flex-end;
   }
   .controls-row {
@@ -1276,14 +1312,54 @@ footer a:hover {
     padding: 0.85rem 1rem;
   }
   .lang-switch {
-    top: 0.75rem;
-    right: 1rem;
+    position: static;
+    margin: 0 auto 0.75rem;
+    width: fit-content;
   }
   .lang-switch button {
     min-height: 40px;
     padding: 0.45rem 0.72rem;
   }
 }
+
+@media (max-width: 420px) {
+  .input-section {
+    padding: 0.95rem;
+  }
+  .password-wrapper input {
+    font-size: 1.2rem;
+    padding: 0.85rem 0.9rem;
+    min-height: 54px;
+  }
+  .password-wrapper button,
+  .password-wrapper-row .reset-btn-inline {
+    min-height: 54px;
+    width: 54px;
+  }
+  .result-card {
+    padding: 1.1rem;
+  }
+  .time-to-crack-title {
+    font-size: clamp(1.6rem, 8vw, 2.2rem);
+  }
+  .big-duration {
+    font-size: clamp(1.9rem, 9vw, 2.6rem);
+  }
+  .big-date {
+    min-height: 0;
+  }
+  .result-sentence {
+    font-size: 0.88rem;
+  }
+  .methodology-summary {
+    padding: 1rem;
+  }
+  .methodology > div,
+  .methodology > ul {
+    padding: 0 1rem 1rem;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
