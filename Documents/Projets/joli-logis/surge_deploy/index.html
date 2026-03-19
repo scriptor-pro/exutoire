@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Suivi des Candidatures Immobilières</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+        
+        .header p {
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
+        
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            padding: 30px 20px;
+            background: #f8f9fa;
+        }
+        
+        .stat-card {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            border-left: 4px solid;
+        }
+        
+        .stat-card.pas-envoye {
+            border-color: #6c757d;
+        }
+        
+        .stat-card.envoye {
+            border-color: #007bff;
+        }
+        
+        .stat-card.en-attente {
+            border-color: #ffc107;
+        }
+        
+        .stat-card.negative {
+            border-color: #dc3545;
+        }
+        
+        .stat-card.positive {
+            border-color: #28a745;
+        }
+        
+        .stat-card .number {
+            font-size: 2em;
+            font-weight: bold;
+            color: #333;
+        }
+        
+        .stat-card .label {
+            color: #666;
+            font-size: 0.9em;
+            margin-top: 5px;
+        }
+        
+        .content {
+            padding: 30px 20px;
+        }
+        
+        .content h2 {
+            color: #333;
+            margin-bottom: 20px;
+            font-size: 1.8em;
+        }
+        
+        .table-wrapper {
+            overflow-x: auto;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        thead {
+            background: #f8f9fa;
+        }
+        
+        th {
+            padding: 15px;
+            text-align: left;
+            font-weight: 600;
+            color: #333;
+            border-bottom: 2px solid #dee2e6;
+        }
+        
+        td {
+            padding: 15px;
+            border-bottom: 1px solid #dee2e6;
+        }
+        
+        tbody tr {
+            transition: background-color 0.2s;
+        }
+        
+        tbody tr:hover {
+            background-color: #f8f9fa;
+        }
+        
+        .badge {
+            display: inline-block;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.85em;
+            font-weight: 600;
+            text-transform: capitalize;
+        }
+        
+        .badge-pas_envoye {
+            background: #e2e3e5;
+            color: #383d41;
+        }
+        
+        .badge-envoye {
+            background: #cfe2ff;
+            color: #084298;
+        }
+        
+        .badge-en_attente {
+            background: #fff3cd;
+            color: #664d03;
+        }
+        
+        .badge-reponse_negative {
+            background: #f8d7da;
+            color: #842029;
+        }
+        
+        .badge-reponse_positive {
+            background: #d1e7dd;
+            color: #0f5132;
+        }
+        
+        .footer {
+            background: #f8f9fa;
+            padding: 20px;
+            text-align: center;
+            color: #666;
+            font-size: 0.9em;
+        }
+        
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 1.8em;
+            }
+            
+            .stats {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            table {
+                font-size: 0.9em;
+            }
+            
+            th, td {
+                padding: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🏠 Suivi de mes Candidatures</h1>
+            <p>Gestion centralisée de vos recherches immobilières</p>
+        </div>
+        
+        <div class="stats">
+            <div class="stat-card pas-envoye">
+                <div class="number">0</div>
+                <div class="label">Pas envoyées</div>
+            </div>
+            <div class="stat-card envoye">
+                <div class="number">1</div>
+                <div class="label">Envoyées</div>
+            </div>
+            <div class="stat-card en-attente">
+                <div class="number">1</div>
+                <div class="label">En attente</div>
+            </div>
+            <div class="stat-card negative">
+                <div class="number">0</div>
+                <div class="label">Refusées</div>
+            </div>
+            <div class="stat-card positive">
+                <div class="number">0</div>
+                <div class="label">Acceptées</div>
+            </div>
+        </div>
+        
+        <div class="content">
+            <h2>Détail des candidatures</h2>
+            <div class="table-wrapper">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Localisation</th>
+                            <th>Loyer</th>
+                            <th>Visite</th>
+                            <th>Date/Heure</th>
+                            <th>Contact</th>
+                            <th>Email</th>
+                            <th>Statut</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        $tableau_html
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p>Généré le: 19-03-2026 à 12:17:02</p>
+        </div>
+    </div>
+</body>
+</html>

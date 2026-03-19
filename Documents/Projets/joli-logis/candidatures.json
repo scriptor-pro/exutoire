@@ -1,0 +1,63 @@
+{
+  "candidatures": [
+    {
+      "id": "appart_1710857400_12345",
+      "localisation": "Paris 15e",
+      "loyer": 1500,
+      "visite_effectuee": "oui",
+      "visite_date": "25-03-2026",
+      "visite_heure": "14:30",
+      "contact": {
+        "nom": "Agence Dupont",
+        "email": "contact@agence-dupont.fr",
+        "telephone": "06 12 34 56 78"
+      },
+      "date_creation": "19-03-2026 12:00:00",
+      "statut_actuel": "envoye",
+      "historique_statuts": [
+        {
+          "statut": "pas_envoye",
+          "date": "19-03-2026 12:00:00",
+          "notes": "Candidature créée"
+        },
+        {
+          "statut": "envoye",
+          "date": "19-03-2026 13:00:00",
+          "notes": "Candidature envoyée"
+        }
+      ]
+    },
+    {
+      "id": "appart_1710857500_54321",
+      "localisation": "Lyon 6e",
+      "loyer": 1200,
+      "visite_effectuee": "non",
+      "visite_date": "28-03-2026",
+      "visite_heure": "10:00",
+      "contact": {
+        "nom": "Marie Dupont",
+        "email": "marie@example.com",
+        "telephone": "+33612345678"
+      },
+      "date_creation": "19-03-2026 11:00:00",
+      "statut_actuel": "en_attente",
+      "historique_statuts": [
+        {
+          "statut": "pas_envoye",
+          "date": "19-03-2026 11:00:00",
+          "notes": "Candidature créée"
+        },
+        {
+          "statut": "envoye",
+          "date": "19-03-2026 12:00:00",
+          "notes": "Candidature envoyée"
+        },
+        {
+          "statut": "en_attente",
+          "date": "19-03-2026 14:00:00",
+          "notes": "En attente de réponse"
+        }
+      ]
+    }
+  ]
+}
