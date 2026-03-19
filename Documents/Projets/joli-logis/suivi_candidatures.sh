@@ -76,13 +76,21 @@ valider_email() {
     return 1
 }
 
-# Valider le numéro de téléphone (simple)
-# Format accepté: 06 12 34 56 78 ou +33612345678 ou (06)1234567890, etc.
+# Valider le numéro de téléphone
+# Accepte les formats internationaux: 06 12 34 56 78, +33612345678, +32479478708, 04 79 47 87 08, etc.
 valider_telephone() {
     local tel=$1
-    # Accepter les chiffres, espaces, tirets, points, parenthèses et le +
-    # Au moins 9 caractères (pour éviter les numéros trop courts)
-    if [[ $tel =~ ^[0-9+\s\-\.()]+$ ]] && [ ${#tel} -ge 9 ]; then
+    # Extraire les chiffres seulement
+    local digits_only=$(echo "$tel" | tr -cd '0-9')
+    
+    # Vérifier qu'il y a au minimum 8 chiffres
+    if [ ${#digits_only} -lt 8 ]; then
+        return 1
+    fi
+    
+    # Vérifier que le numéro ne contient que des caractères valides
+    # (chiffres, espaces, tirets, points, parenthèses, plus)
+    if echo "$tel" | grep -qE '^[0-9+() ./-]*$'; then
         return 0
     fi
     return 1
@@ -179,7 +187,7 @@ ajouter_candidature() {
     
     # Téléphone
     while true; do
-        echo -n "Numéro de téléphone (format: 06 12 34 56 78 ou +33612345678, optionnel) : "
+        echo -n "Numéro de téléphone (format: 06 12 34 56 78 (France), +32479478708 (Belgique), etc., optionnel) : "
         read -r tel_contact
         if [ -z "$tel_contact" ]; then
             tel_contact=""
@@ -187,7 +195,7 @@ ajouter_candidature() {
         elif valider_telephone "$tel_contact"; then
             break
         else
-            log_error "Format invalide. Utilisez: 06 12 34 56 78 ou +33612345678 (minimum 9 caractères)"
+            log_error "Format invalide. Formats acceptés: 06 12 34 56 78 (France), +32479478708 (Belgique), 04 79 47 87 08, etc. (minimum 8 chiffres)"
         fi
     done
     
@@ -424,7 +432,7 @@ editer_candidature() {
                 ;;
             8)
                 while true; do
-                    echo -n "Nouveau téléphone (format: 06 12 34 56 78 ou +33612345678, laisser vide pour supprimer) : "
+                    echo -n "Nouveau téléphone (format: 06 12 34 56 78 (France), +32479478708 (Belgique), etc., laisser vide pour supprimer) : "
                     read -r nouvelle_valeur
                     if [ -z "$nouvelle_valeur" ]; then
                         local temp_file=$(mktemp)
@@ -439,7 +447,7 @@ editer_candidature() {
                         log_success "Téléphone mis à jour"
                         break
                     else
-                        log_error "Format invalide. Utilisez: 06 12 34 56 78 ou +33612345678 (minimum 9 caractères)"
+                        log_error "Format invalide. Formats acceptés: 06 12 34 56 78 (France), +32479478708 (Belgique), 04 79 47 87 08, etc. (minimum 8 chiffres)"
                     fi
                 done
                 ;;
