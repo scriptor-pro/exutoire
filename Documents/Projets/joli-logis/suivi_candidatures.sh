@@ -1097,7 +1097,7 @@ with open('$temp_html', 'w') as f:
                 // Mot de passe correct
                 document.getElementById('loginScreen').style.display = 'none';
                 document.getElementById('dashboardScreen').style.display = 'block';
-                sessionStorage.setItem('authenticated', 'true');
+                localStorage.setItem('authenticated', 'true');
             } else {
                 // Mot de passe incorrect
                 document.getElementById('errorMessage').style.display = 'block';
@@ -1108,7 +1108,7 @@ with open('$temp_html', 'w') as f:
         
         // Vérifier si l'utilisateur est déjà authentifié
         window.addEventListener('load', function() {
-            if (sessionStorage.getItem('authenticated') === 'true') {
+            if (localStorage.getItem('authenticated') === 'true') {
                 document.getElementById('loginScreen').style.display = 'none';
                 document.getElementById('dashboardScreen').style.display = 'block';
             }
@@ -1347,18 +1347,72 @@ with open('$HTML_FILE', 'w') as f:
     </div>
     
     <script>
-        // Vérifier si l'utilisateur est authentifié
-        if (sessionStorage.getItem('authenticated') !== 'true') {
-            // Si pas authentifié, rediriger vers index
-            window.location.href = 'index.html';
+        // Mot de passe haché en SHA-256
+        const PASSWORD_HASH = "2772fe99324c8400f7223c23e6137cfb36c09ab22d8d560277c8fae105ac4989";
+        
+        // Fonction pour hasher avec SHA-256
+        async function sha256(str) {
+            const buf = new TextEncoder().encode(str);
+            const hashBuffer = await crypto.subtle.digest('SHA-256', buf);
+            const hashArray = Array.from(new Uint8Array(hashBuffer));
+            const hashHex = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+            return hashHex;
         }
         
-        // Afficher le message vide si aucune ligne dans le tableau
-        const tableBody = document.querySelector('table tbody');
-        if (!tableBody || tableBody.children.length === 0) {
-            document.getElementById('tableWrapper').style.display = 'none';
-            document.getElementById('emptyMessage').style.display = 'block';
+        // Vérifier le mot de passe
+        async function checkPassword(event) {
+            event.preventDefault();
+            const password = document.getElementById('passwordInput').value;
+            const hash = await sha256(password);
+            
+            if (hash === PASSWORD_HASH) {
+                // Mot de passe correct
+                localStorage.setItem('authenticated', 'true');
+                location.reload();
+            } else {
+                // Mot de passe incorrect
+                document.getElementById('errorMessage').style.display = 'block';
+                document.getElementById('passwordInput').value = '';
+                document.getElementById('passwordInput').focus();
+            }
         }
+        
+        // Vérifier si l'utilisateur est déjà authentifié
+        window.addEventListener('load', function() {
+            if (localStorage.getItem('authenticated') !== 'true') {
+                // Ajouter le formulaire de login dynamiquement
+                const loginHTML = `
+                    <div style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); display: flex; justify-content: center; align-items: center; z-index: 9999;">
+                        <div style="background: white; padding: 40px; border-radius: 15px; width: 90%; max-width: 400px; box-shadow: 0 20px 60px rgba(0,0,0,0.3);">
+                            <h2 style="text-align: center; color: #333; margin-bottom: 10px;">🏠 Joli Logis</h2>
+                            <p style="text-align: center; color: #666; margin-bottom: 20px;">Authentification requise</p>
+                            <form onsubmit="checkPassword(event)" style="display: flex; flex-direction: column; gap: 15px;">
+                                <input 
+                                    type="password" 
+                                    id="passwordInput" 
+                                    placeholder="Mot de passe" 
+                                    autocomplete="off"
+                                    style="padding: 12px; border: 2px solid #ddd; border-radius: 8px; font-size: 1em;"
+                                    autofocus
+                                />
+                                <button type="submit" style="padding: 12px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border: none; border-radius: 8px; font-size: 1em; font-weight: 600; cursor: pointer;">Accéder</button>
+                                <div id="errorMessage" style="color: #dc3545; text-align: center; font-size: 0.9em; display: none;">
+                                    Mot de passe incorrect
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                `;
+                document.body.insertAdjacentHTML('beforeend', loginHTML);
+            } else {
+                // Afficher le message vide si aucune ligne dans le tableau
+                const tableBody = document.querySelector('table tbody');
+                if (!tableBody || tableBody.children.length === 0) {
+                    document.getElementById('tableWrapper').style.display = 'none';
+                    document.getElementById('emptyMessage').style.display = 'block';
+                }
+            }
+        });
     </script>
 </body>
 </html>

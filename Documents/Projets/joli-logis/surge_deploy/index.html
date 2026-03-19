@@ -374,7 +374,7 @@
         </div>
         
         <div class="footer">
-            <p>Généré le: 19-03-2026 à 12:38:04</p>
+            <p>Généré le: 19-03-2026 à 12:42:48</p>
         </div>
     </div>
 </body>
@@ -405,7 +405,7 @@
                 // Mot de passe correct
                 document.getElementById('loginScreen').style.display = 'none';
                 document.getElementById('dashboardScreen').style.display = 'block';
-                sessionStorage.setItem('authenticated', 'true');
+                localStorage.setItem('authenticated', 'true');
             } else {
                 // Mot de passe incorrect
                 document.getElementById('errorMessage').style.display = 'block';
@@ -416,7 +416,7 @@
         
         // Vérifier si l'utilisateur est déjà authentifié
         window.addEventListener('load', function() {
-            if (sessionStorage.getItem('authenticated') === 'true') {
+            if (localStorage.getItem('authenticated') === 'true') {
                 document.getElementById('loginScreen').style.display = 'none';
                 document.getElementById('dashboardScreen').style.display = 'block';
             }
