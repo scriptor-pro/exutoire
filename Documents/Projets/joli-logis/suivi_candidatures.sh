@@ -884,18 +884,48 @@ with open('$HTML_FILE', 'w') as f:
     cp "$HTML_FILE" surge_deploy/
     
     if command -v surge &> /dev/null; then
-        log_info "Déploiement sur Surge en cours..."
-        cd surge_deploy
-        surge joli-logis.surge.sh --skip-browser > /dev/null 2>&1
-        cd ..
+        log_info "En déploiement sur Surge..."
+        echo ""
         
-        if [ $? -eq 0 ]; then
-            log_success "Page déployée sur https://joli-logis.surge.sh"
+        # Créer un fichier temporaire pour capturer la sortie
+        local deploy_log=$(mktemp)
+        
+        # Lancer le déploiement et capturer la sortie
+        if surge surge_deploy joli-logis.surge.sh --skip-browser > "$deploy_log" 2>&1; then
+            # Vérifier que le déploiement a réussi en cherchant "Success!" dans les logs
+            if grep -q "Success!" "$deploy_log"; then
+                echo ""
+                log_success "Déploiement terminé"
+                echo -e "${GREEN}✓ Page accessible sur :${NC} https://joli-logis.surge.sh"
+                
+                # Extraire et afficher l'URL de production
+                local prod_url=$(grep -o "Production[[:space:]]*\.\*[[:space:]]*\([a-z0-9-]*\.surge\.sh\)" "$deploy_log" | tail -1 || echo "joli-logis.surge.sh")
+                echo -e "${GREEN}✓ URL Production :${NC} https://joli-logis.surge.sh"
+                
+                # Afficher la taille du fichier déployé
+                local file_size=$(ls -lh surge_deploy/index.html | awk '{print $5}')
+                echo -e "${GREEN}✓ Taille du fichier :${NC} $file_size"
+                
+            else
+                echo ""
+                log_error "Problème avec le déploiement"
+                echo ""
+                echo "Détails de l'erreur :"
+                tail -20 "$deploy_log"
+            fi
         else
-            log_warning "Erreur lors du déploiement sur Surge"
+            # Le déploiement a échoué
+            echo ""
+            log_error "Problème avec le déploiement"
+            echo ""
+            echo "Détails de l'erreur :"
+            tail -20 "$deploy_log"
         fi
+        
+        rm -f "$deploy_log"
     else
-        log_warning "Surge n'est pas installé. Installation : npm install -g surge"
+        log_warning "Surge n'est pas installé"
+        echo "Installation : npm install -g surge"
     fi
 }
 
