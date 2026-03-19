@@ -14,7 +14,7 @@ NC='\033[0m' # No Color
 
 # Fichiers de stockage
 DATA_FILE="candidatures.json"
-HTML_FILE="suivi_candidatures.html"
+HTML_FILE="index.html"
 
 # Fonction pour afficher les messages
 log_info() {
