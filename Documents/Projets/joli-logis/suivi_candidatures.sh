@@ -635,8 +635,20 @@ generer_html() {
     local reponse_negative=$(jq '[.candidatures[] | select(.statut_actuel == "reponse_negative")] | length' "$DATA_FILE")
     local reponse_positive=$(jq '[.candidatures[] | select(.statut_actuel == "reponse_positive")] | length' "$DATA_FILE")
     
-    # Générer le tableau des candidatures
-    tableau_html=$(jq -r '.candidatures | sort_by(.date_creation) | reverse[] | 
+    # Générer le tableau des candidatures ACTIVES (sans réponses négatives)
+    tableau_html=$(jq -r '.candidatures | sort_by(.date_creation) | reverse[] | select(.statut_actuel != "reponse_negative") | 
+        "<tr class=\u0027statut-" + .statut_actuel + "\u0027>" +
+        "<td>" + (if .localisation == "" then "<em>-</em>" else .localisation end) + "</td>" +
+        "<td>" + (if .loyer == null then "<em>-</em>" else (.loyer | tostring) + "€" end) + "</td>" +
+        "<td>" + .visite_effectuee + "</td>" +
+        "<td>" + (if .visite_date != "" then .visite_date + " " + .visite_heure else "<em>-</em>" end) + "</td>" +
+        "<td>" + (if .contact.nom == null then "<em>-</em>" else .contact.nom end) + "</td>" +
+        "<td>" + (if .contact.email == null then "<em>-</em>" else .contact.email end) + "</td>" +
+        "<td><span class=\u0027badge badge-" + .statut_actuel + "\u0027>" + .statut_actuel + "</span></td>" +
+        "</tr>"' "$DATA_FILE")
+    
+    # Générer le tableau pour l'HISTORIQUE (réponses négatives uniquement)
+    tableau_historique=$(jq -r '.candidatures | sort_by(.date_creation) | reverse[] | select(.statut_actuel == "reponse_negative") | 
         "<tr class=\u0027statut-" + .statut_actuel + "\u0027>" +
         "<td>" + (if .localisation == "" then "<em>-</em>" else .localisation end) + "</td>" +
         "<td>" + (if .loyer == null then "<em>-</em>" else (.loyer | tostring) + "€" end) + "</td>" +
@@ -857,6 +869,11 @@ generer_html() {
         <div class="header">
             <h1>🏠 Suivi de mes Candidatures</h1>
             <p>Gestion centralisée de vos recherches immobilières</p>
+        </div>
+        
+        <div style="background: #f8f9fa; padding: 15px 20px; text-align: center; border-bottom: 1px solid #ddd;">
+            <a href="#" style="color: #667eea; text-decoration: none; font-weight: 600; margin: 0 15px;">📊 Dashboard</a>
+            <a href="historique.html" style="color: #667eea; text-decoration: none; font-weight: 600; margin: 0 15px;">📋 Historique (Refusées)</a>
         </div>
         
         <div class="stats">
@@ -1126,9 +1143,246 @@ with open('$HTML_FILE', 'w') as f:
     
     log_success "Page HTML générée : $HTML_FILE"
     
+    # Générer la page HISTORIQUE avec les réponses négatives
+    log_info "Génération de la page historique..."
+    
+    local temp_historique=$(mktemp)
+    cat > "$temp_historique" <<'HISTORIQUE_EOF'
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Historique - Réponses Négatives</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+        
+        .header p {
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
+        
+        .nav-buttons {
+            padding: 20px;
+            background: #f8f9fa;
+            text-align: center;
+        }
+        
+        .nav-buttons a {
+            display: inline-block;
+            padding: 10px 20px;
+            margin: 0 5px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: transform 0.2s;
+        }
+        
+        .nav-buttons a:hover {
+            transform: scale(1.05);
+        }
+        
+        .content {
+            padding: 30px 20px;
+        }
+        
+        .content h2 {
+            color: #333;
+            margin-bottom: 20px;
+            font-size: 1.8em;
+        }
+        
+        .empty-message {
+            text-align: center;
+            padding: 40px;
+            color: #666;
+            font-size: 1.1em;
+        }
+        
+        .table-wrapper {
+            overflow-x: auto;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        thead {
+            background: #f8f9fa;
+        }
+        
+        th {
+            padding: 15px;
+            text-align: left;
+            font-weight: 600;
+            color: #333;
+            border-bottom: 2px solid #dee2e6;
+        }
+        
+        td {
+            padding: 15px;
+            border-bottom: 1px solid #dee2e6;
+        }
+        
+        tbody tr {
+            transition: background-color 0.2s;
+        }
+        
+        tbody tr:hover {
+            background-color: #f8f9fa;
+        }
+        
+        .badge {
+            display: inline-block;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.85em;
+            font-weight: 600;
+            text-transform: capitalize;
+        }
+        
+        .badge-reponse_negative {
+            background: #f8d7da;
+            color: #842029;
+        }
+        
+        .footer {
+            background: #f8f9fa;
+            padding: 20px;
+            text-align: center;
+            color: #666;
+            font-size: 0.9em;
+        }
+        
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 1.8em;
+            }
+            
+            table {
+                font-size: 0.9em;
+            }
+            
+            th, td {
+                padding: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📋 Historique</h1>
+            <p>Réponses Négatives</p>
+        </div>
+        
+        <div class="nav-buttons">
+            <a href="index.html">📊 Dashboard</a>
+            <a href="#" style="background: linear-gradient(135deg, #dc3545 0%, #c82333 100%);">📋 Historique</a>
+        </div>
+        
+        <div class="content">
+            <h2>Candidatures Refusées</h2>
+            <div id="emptyMessage" class="empty-message" style="display: none;">
+                Aucune réponse négative pour le moment. C'est une bonne nouvelle !
+            </div>
+            <div class="table-wrapper" id="tableWrapper">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Localisation</th>
+                            <th>Loyer</th>
+                            <th>Visite</th>
+                            <th>Date/Heure</th>
+                            <th>Contact</th>
+                            <th>Email</th>
+                            <th>Statut</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        HISTORIQUE_TABLEAU_PLACEHOLDER
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p>Généré le: HISTORIQUE_GENERATION_PLACEHOLDER</p>
+        </div>
+    </div>
+    
+    <script>
+        // Vérifier si l'utilisateur est authentifié
+        if (sessionStorage.getItem('authenticated') !== 'true') {
+            // Si pas authentifié, rediriger vers index
+            window.location.href = 'index.html';
+        }
+        
+        // Afficher le message vide si aucune ligne dans le tableau
+        const tableBody = document.querySelector('table tbody');
+        if (!tableBody || tableBody.children.length === 0) {
+            document.getElementById('tableWrapper').style.display = 'none';
+            document.getElementById('emptyMessage').style.display = 'block';
+        }
+    </script>
+</body>
+</html>
+HISTORIQUE_EOF
+
+    # Remplacer les placeholders dans la page historique
+    perl -i -pe "s/HISTORIQUE_GENERATION_PLACEHOLDER/$date_generation/g" "$temp_historique"
+    
+    python3 -c "
+with open('$temp_historique', 'r') as f:
+    content = f.read()
+tableau = '''$tableau_historique'''
+content = content.replace('HISTORIQUE_TABLEAU_PLACEHOLDER', tableau)
+with open('$temp_historique', 'w') as f:
+    f.write(content)
+"
+    
     # Copier et déployer sur Surge
     mkdir -p surge_deploy
     cp "$HTML_FILE" surge_deploy/
+    cp "$temp_historique" surge_deploy/historique.html
+    rm -f "$temp_historique"
+    
+    log_success "Page historique générée : historique.html"
     
     if command -v surge &> /dev/null; then
         log_info "En déploiement sur Surge..."
