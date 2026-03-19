@@ -256,12 +256,29 @@ afficher_candidatures() {
 editer_candidature() {
     log_info "=== Éditer une candidature ==="
     
-    # Afficher les candidatures disponibles
+    # Afficher les candidatures disponibles avec numéro
     echo -e "\n${BLUE}Candidatures disponibles :${NC}"
-    jq -r '.candidatures[] | "\(.id): \(.localisation) - \(.loyer)€"' "$DATA_FILE" | nl
+    local -a candidatures_array
+    local count=1
+    while IFS= read -r line; do
+        candidatures_array[$count]="$line"
+        echo "$count) $line"
+        ((count++))
+    done < <(jq -r '.candidatures[] | "\(.id): \(.localisation) - \(.loyer)€"' "$DATA_FILE")
     
-    echo -n "Sélectionner l'ID de la candidature à éditer : "
+    echo -n "Sélectionner le numéro ou l'ID de la candidature à éditer : "
     read -r id_selection
+    
+    # Si c'est un numéro, extraire l'ID correspondant
+    if [[ $id_selection =~ ^[0-9]+$ ]]; then
+        if [ $id_selection -ge 1 ] && [ $id_selection -lt $count ]; then
+            # Extraire l'ID de la ligne (avant le ':')
+            id_selection=$(echo "${candidatures_array[$id_selection]}" | cut -d: -f1)
+        else
+            log_error "Numéro invalide"
+            return 1
+        fi
+    fi
     
     # Vérifier que l'ID existe
     local existe=$(jq ".candidatures[] | select(.id == \"$id_selection\") | .id" "$DATA_FILE" 2>/dev/null || echo "")
@@ -442,12 +459,29 @@ editer_candidature() {
 mettre_a_jour_statut() {
     log_info "=== Mettre à jour le statut ==="
     
-    # Afficher les candidatures disponibles
+    # Afficher les candidatures disponibles avec numéro
     echo -e "\n${BLUE}Candidatures disponibles :${NC}"
-    jq -r '.candidatures[] | "\(.id): \(.localisation) - \(.loyer)€ [\(.statut_actuel)]"' "$DATA_FILE" | nl
+    local -a candidatures_array
+    local count=1
+    while IFS= read -r line; do
+        candidatures_array[$count]="$line"
+        echo "$count) $line"
+        ((count++))
+    done < <(jq -r '.candidatures[] | "\(.id): \(.localisation) - \(.loyer)€ [\(.statut_actuel)]"' "$DATA_FILE")
     
-    echo -n "Sélectionner l'ID de la candidature : "
+    echo -n "Sélectionner le numéro ou l'ID de la candidature : "
     read -r id_selection
+    
+    # Si c'est un numéro, extraire l'ID correspondant
+    if [[ $id_selection =~ ^[0-9]+$ ]]; then
+        if [ $id_selection -ge 1 ] && [ $id_selection -lt $count ]; then
+            # Extraire l'ID de la ligne (avant le ':')
+            id_selection=$(echo "${candidatures_array[$id_selection]}" | cut -d: -f1)
+        else
+            log_error "Numéro invalide"
+            return 1
+        fi
+    fi
     
     # Vérifier que l'ID existe
     local existe=$(jq ".candidatures[] | select(.id == \"$id_selection\") | .id" "$DATA_FILE" 2>/dev/null || echo "")
@@ -506,12 +540,29 @@ mettre_a_jour_statut() {
 mettre_a_jour_visite() {
     log_info "=== Mettre à jour les infos de visite ==="
     
-    # Afficher les candidatures disponibles
+    # Afficher les candidatures disponibles avec numéro
     echo -e "\n${BLUE}Candidatures disponibles :${NC}"
-    jq -r '.candidatures[] | "\(.id): \(.localisation) - \(.visite_effectuee)"' "$DATA_FILE" | nl
+    local -a candidatures_array
+    local count=1
+    while IFS= read -r line; do
+        candidatures_array[$count]="$line"
+        echo "$count) $line"
+        ((count++))
+    done < <(jq -r '.candidatures[] | "\(.id): \(.localisation) - \(.visite_effectuee)"' "$DATA_FILE")
     
-    echo -n "Sélectionner l'ID de la candidature : "
+    echo -n "Sélectionner le numéro ou l'ID de la candidature : "
     read -r id_selection
+    
+    # Si c'est un numéro, extraire l'ID correspondant
+    if [[ $id_selection =~ ^[0-9]+$ ]]; then
+        if [ $id_selection -ge 1 ] && [ $id_selection -lt $count ]; then
+            # Extraire l'ID de la ligne (avant le ':')
+            id_selection=$(echo "${candidatures_array[$id_selection]}" | cut -d: -f1)
+        else
+            log_error "Numéro invalide"
+            return 1
+        fi
+    fi
     
     # Vérifier que l'ID existe
     local existe=$(jq ".candidatures[] | select(.id == \"$id_selection\") | .id" "$DATA_FILE" 2>/dev/null || echo "")
