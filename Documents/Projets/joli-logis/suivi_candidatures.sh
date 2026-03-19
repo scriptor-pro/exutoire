@@ -271,7 +271,7 @@ editer_candidature() {
     
     # Si c'est un numéro, extraire l'ID correspondant
     if [[ $id_selection =~ ^[0-9]+$ ]]; then
-        if [ $id_selection -ge 1 ] && [ $id_selection -lt $count ]; then
+        if [ $id_selection -ge 1 ] && [ $id_selection -le $((count - 1)) ]; then
             # Extraire l'ID de la ligne (avant le ':')
             id_selection=$(echo "${candidatures_array[$id_selection]}" | cut -d: -f1)
         else
@@ -475,7 +475,7 @@ mettre_a_jour_statut() {
     
     # Si c'est un numéro, extraire l'ID correspondant
     if [[ $id_selection =~ ^[0-9]+$ ]]; then
-        if [ $id_selection -ge 1 ] && [ $id_selection -lt $count ]; then
+        if [ $id_selection -ge 1 ] && [ $id_selection -le $((count - 1)) ]; then
             # Extraire l'ID de la ligne (avant le ':')
             id_selection=$(echo "${candidatures_array[$id_selection]}" | cut -d: -f1)
         else
@@ -556,7 +556,7 @@ mettre_a_jour_visite() {
     
     # Si c'est un numéro, extraire l'ID correspondant
     if [[ $id_selection =~ ^[0-9]+$ ]]; then
-        if [ $id_selection -ge 1 ] && [ $id_selection -lt $count ]; then
+        if [ $id_selection -ge 1 ] && [ $id_selection -le $((count - 1)) ]; then
             # Extraire l'ID de la ligne (avant le ':')
             id_selection=$(echo "${candidatures_array[$id_selection]}" | cut -d: -f1)
         else
