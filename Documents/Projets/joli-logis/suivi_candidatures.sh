@@ -649,7 +649,9 @@ generer_html() {
     
     date_generation=$(date '+%d-%m-%Y à %H:%M:%S')
     
-    cat > "$HTML_FILE" <<'EOF'
+    # Créer d'abord un fichier temporaire avec le contenu du dashboard
+    local temp_html=$(mktemp)
+    cat > "$temp_html" <<'EOF'
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -910,24 +912,217 @@ generer_html() {
 </html>
 EOF
 
-    # Remplacer les placeholders avec perl pour éviter les problèmes de sed avec les caractères spéciaux
-    perl -i -pe "s/PAS_ENVOYE_COUNT/$pas_envoye/g" "$HTML_FILE"
-    perl -i -pe "s/ENVOYE_COUNT/$envoye/g" "$HTML_FILE"
-    perl -i -pe "s/EN_ATTENTE_COUNT/$en_attente/g" "$HTML_FILE"
-    perl -i -pe "s/NEGATIVE_COUNT/$reponse_negative/g" "$HTML_FILE"
-    perl -i -pe "s/POSITIVE_COUNT/$reponse_positive/g" "$HTML_FILE"
-    perl -i -pe "s/GENERATION_PLACEHOLDER/$date_generation/g" "$HTML_FILE"
+    # Remplacer les placeholders dans le fichier temporaire
+    perl -i -pe "s/PAS_ENVOYE_COUNT/$pas_envoye/g" "$temp_html"
+    perl -i -pe "s/ENVOYE_COUNT/$envoye/g" "$temp_html"
+    perl -i -pe "s/EN_ATTENTE_COUNT/$en_attente/g" "$temp_html"
+    perl -i -pe "s/NEGATIVE_COUNT/$reponse_negative/g" "$temp_html"
+    perl -i -pe "s/POSITIVE_COUNT/$reponse_positive/g" "$temp_html"
+    perl -i -pe "s/GENERATION_PLACEHOLDER/$date_generation/g" "$temp_html"
     
     # Remplacer le tableau (qui contient du HTML)
     python3 -c "
 import re
-with open('$HTML_FILE', 'r') as f:
+with open('$temp_html', 'r') as f:
     content = f.read()
 tableau = '''$tableau_html'''
 content = content.replace('TABLEAU_PLACEHOLDER', tableau)
+with open('$temp_html', 'w') as f:
+    f.write(content)
+"
+    
+    # Lire le contenu du dashboard généré
+    local dashboard_content=$(cat "$temp_html")
+    
+    # Créer la page finale avec protection par mot de passe
+    cat > "$HTML_FILE" <<'PROTECTED_EOF'
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Suivi des Candidatures Immobilières</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        
+        .login-container {
+            background: white;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            width: 100%;
+            max-width: 400px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        
+        .login-container h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 10px;
+        }
+        
+        .login-container p {
+            text-align: center;
+            color: #666;
+            font-size: 0.9em;
+            margin-bottom: 20px;
+        }
+        
+        .login-form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        
+        .login-form input {
+            padding: 12px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 1em;
+            transition: border-color 0.3s;
+        }
+        
+        .login-form input:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+        
+        .login-form button {
+            padding: 12px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+        
+        .login-form button:hover {
+            transform: scale(1.02);
+        }
+        
+        .login-form button:active {
+            transform: scale(0.98);
+        }
+        
+        .error-message {
+            color: #dc3545;
+            text-align: center;
+            font-size: 0.9em;
+            display: none;
+        }
+        
+        .dashboard {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div id="loginScreen" class="login-container">
+        <h1>🏠 Joli Logis</h1>
+        <p>Suivi des Candidatures Immobilières</p>
+        <form class="login-form" onsubmit="checkPassword(event)">
+            <input 
+                type="password" 
+                id="passwordInput" 
+                placeholder="Mot de passe" 
+                autocomplete="off"
+            />
+            <button type="submit">Accéder</button>
+            <div class="error-message" id="errorMessage">
+                Mot de passe incorrect
+            </div>
+        </form>
+    </div>
+    
+    <div id="dashboardScreen" class="dashboard">
+        DASHBOARD_PLACEHOLDER
+    </div>
+    
+    <script>
+        // Mot de passe haché en SHA-256
+        const PASSWORD_HASH = "PASSWORD_HASH_PLACEHOLDER";
+        
+        // Fonction pour hasher avec SHA-256
+        async function sha256(str) {
+            const buf = new TextEncoder().encode(str);
+            const hashBuffer = await crypto.subtle.digest('SHA-256', buf);
+            const hashArray = Array.from(new Uint8Array(hashBuffer));
+            const hashHex = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+            return hashHex;
+        }
+        
+        // Vérifier le mot de passe
+        async function checkPassword(event) {
+            event.preventDefault();
+            const password = document.getElementById('passwordInput').value;
+            const hash = await sha256(password);
+            
+            if (hash === PASSWORD_HASH) {
+                // Mot de passe correct
+                document.getElementById('loginScreen').style.display = 'none';
+                document.getElementById('dashboardScreen').style.display = 'block';
+                sessionStorage.setItem('authenticated', 'true');
+            } else {
+                // Mot de passe incorrect
+                document.getElementById('errorMessage').style.display = 'block';
+                document.getElementById('passwordInput').value = '';
+                document.getElementById('passwordInput').focus();
+            }
+        }
+        
+        // Vérifier si l'utilisateur est déjà authentifié
+        window.addEventListener('load', function() {
+            if (sessionStorage.getItem('authenticated') === 'true') {
+                document.getElementById('loginScreen').style.display = 'none';
+                document.getElementById('dashboardScreen').style.display = 'block';
+            }
+        });
+    </script>
+</body>
+</html>
+PROTECTED_EOF
+    
+    # Remplacer les placeholders dans la page protégée
+    # Hash SHA-256 du mot de passe logisjoli1881*.
+    local password_hash="2772fe99324c8400f7223c23e6137cfb36c09ab22d8d560277c8fae105ac4989"
+    
+    # Utiliser Python pour remplacer tous les placeholders en une seule opération
+    python3 -c "
+with open('$HTML_FILE', 'r') as f:
+    content = f.read()
+    
+# Remplacer le hash du mot de passe
+content = content.replace('PASSWORD_HASH_PLACEHOLDER', '$password_hash')
+
+# Remplacer le dashboard
+with open('$temp_html', 'r') as f:
+    dashboard = f.read()
+content = content.replace('DASHBOARD_PLACEHOLDER', dashboard)
+
 with open('$HTML_FILE', 'w') as f:
     f.write(content)
 "
+    
+    rm -f "$temp_html"
     
     log_success "Page HTML générée : $HTML_FILE"
     
