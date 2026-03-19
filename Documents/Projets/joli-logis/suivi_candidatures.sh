@@ -298,6 +298,7 @@ editer_candidature() {
     echo "7) Email"
     echo "8) Téléphone"
     echo "9) Retour au menu"
+    echo ""
     
     while true; do
         echo -n "Choisir un champ à éditer (1-9) : "
@@ -443,11 +444,11 @@ editer_candidature() {
                 done
                 ;;
             9)
-                log_info "Retour au menu"
+                log_info "Retour au menu principal"
                 return
                 ;;
             *)
-                log_error "Option invalide"
+                log_error "Option invalide (1-9)"
                 ;;
         esac
         
