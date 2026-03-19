@@ -21,26 +21,80 @@ log_info() {
     echo -e "${BLUE}ℹ ${NC}$1"
 }
 
+
+# Valider l'URL
+valider_url() {
+    local url=$1
+    if [[ $url =~ ^https?:// ]]; then
+        return 0
+    fi
+    return 1
+}
 log_success() {
     echo -e "${GREEN}✓ ${NC}$1"
 }
 
+
+# Valider l'URL
+valider_url() {
+    local url=$1
+    if [[ $url =~ ^https?:// ]]; then
+        return 0
+    fi
+    return 1
+}
 log_error() {
     echo -e "${RED}✗ ${NC}$1"
 }
 
+
+# Valider l'URL
+valider_url() {
+    local url=$1
+    if [[ $url =~ ^https?:// ]]; then
+        return 0
+    fi
+    return 1
+}
 log_warning() {
     echo -e "${YELLOW}⚠ ${NC}$1"
 }
 
+
+# Valider l'URL
+valider_url() {
+    local url=$1
+    if [[ $url =~ ^https?:// ]]; then
+        return 0
+    fi
+    return 1
+}
 # Initialiser le fichier JSON s'il n'existe pas
 init_json() {
     if [ ! -f "$DATA_FILE" ]; then
         echo '{"candidatures": []}' > "$DATA_FILE"
         log_success "Fichier de données créé : $DATA_FILE"
     fi
+
+# Valider l'URL
+valider_url() {
+    local url=$1
+    if [[ $url =~ ^https?:// ]]; then
+        return 0
+    fi
+    return 1
+}
 }
 
+
+# Valider l'URL
+valider_url() {
+    local url=$1
+    if [[ $url =~ ^https?:// ]]; then
+        return 0
+    fi
+    return 1
+}
 # Valider le format de date DD-MM-YYYY
 valider_date() {
     local date=$1
@@ -58,6 +112,15 @@ valider_date() {
     return 1
 }
 
+
+# Valider l'URL
+valider_url() {
+    local url=$1
+    if [[ $url =~ ^https?:// ]]; then
+        return 0
+    fi
+    return 1
+}
 # Valider le format d'heure HH:MM
 valider_heure() {
     local heure=$1
@@ -67,6 +130,15 @@ valider_heure() {
     return 1
 }
 
+
+# Valider l'URL
+valider_url() {
+    local url=$1
+    if [[ $url =~ ^https?:// ]]; then
+        return 0
+    fi
+    return 1
+}
 # Valider l'email
 valider_email() {
     local email=$1
@@ -76,6 +148,15 @@ valider_email() {
     return 1
 }
 
+
+# Valider l'URL
+valider_url() {
+    local url=$1
+    if [[ $url =~ ^https?:// ]]; then
+        return 0
+    fi
+    return 1
+}
 # Valider le numéro de téléphone
 # Accepte les formats internationaux: 06 12 34 56 78, +33612345678, +32479478708, 04 79 47 87 08, etc.
 valider_telephone() {
@@ -96,11 +177,29 @@ valider_telephone() {
     return 1
 }
 
+
+# Valider l'URL
+valider_url() {
+    local url=$1
+    if [[ $url =~ ^https?:// ]]; then
+        return 0
+    fi
+    return 1
+}
 # Générer un ID unique
 generer_id() {
     echo "appart_$(date +%s)_$RANDOM"
 }
 
+
+# Valider l'URL
+valider_url() {
+    local url=$1
+    if [[ $url =~ ^https?:// ]]; then
+        return 0
+    fi
+    return 1
+}
 # Ajouter une nouvelle candidature
 ajouter_candidature() {
     log_info "=== Ajouter une nouvelle candidature ==="
@@ -199,6 +298,10 @@ ajouter_candidature() {
         fi
     done
     
+    # URL de l'offre
+    echo -n "URL de l'offre (ex: https://www.seloger.com/..., optionnel) : "
+    read -r url_offre
+    
     # Créer l'objet candidature
     local id=$(generer_id)
     local date_creation=$(date '+%d-%m-%Y %H:%M:%S')
@@ -211,6 +314,7 @@ ajouter_candidature() {
     local nom_contact_json=$([ -z "$nom_contact" ] && echo "null" || echo "\"$nom_contact\"")
     local email_contact_json=$([ -z "$email_contact" ] && echo "null" || echo "\"$email_contact\"")
     local tel_contact_json=$([ -z "$tel_contact" ] && echo "null" || echo "\"$tel_contact\"")
+    local url_offre_json=$([ -z "$url_offre" ] && echo "null" || echo "\"$url_offre\"")
     
     local candidature=$(cat <<EOF
 {
@@ -220,6 +324,7 @@ ajouter_candidature() {
   "visite_effectuee": "$visite_effectuee",
   "visite_date": "$([ -z "$visite_date" ] && echo "" || echo "$visite_date")",
   "visite_heure": "$([ -z "$visite_heure" ] && echo "" || echo "$visite_heure")",
+  "url_offre": $url_offre_json,
   "contact": {
     "nom": $nom_contact_json,
     "email": $email_contact_json,
@@ -246,6 +351,15 @@ EOF
     log_success "Candidature ajoutée avec l'ID : $id"
 }
 
+
+# Valider l'URL
+valider_url() {
+    local url=$1
+    if [[ $url =~ ^https?:// ]]; then
+        return 0
+    fi
+    return 1
+}
 # Afficher toutes les candidatures
 afficher_candidatures() {
     log_info "=== Mes candidatures ==="
@@ -260,6 +374,15 @@ afficher_candidatures() {
     jq -r '.candidatures[] | "\n📍 \(if .localisation == "" then "(Non renseigné)" else .localisation end) - \(if .loyer == null then "?" else .loyer end)€\nStatut: \(.statut_actuel) | Visite: \(.visite_effectuee)\nContact: \(if .contact.nom == null then "(Non renseigné)" else .contact.nom end) - \(if .contact.email == null then "(Non renseigné)" else .contact.email end)"' "$DATA_FILE"
 }
 
+
+# Valider l'URL
+valider_url() {
+    local url=$1
+    if [[ $url =~ ^https?:// ]]; then
+        return 0
+    fi
+    return 1
+}
 # Éditer une candidature
 editer_candidature() {
     log_info "=== Éditer une candidature ==="
@@ -305,11 +428,12 @@ editer_candidature() {
     echo "6) Nom du propriétaire/agence"
     echo "7) Email"
     echo "8) Téléphone"
-    echo "9) Retour au menu"
+    echo "9) URL de l'offre"
+    echo "10) Retour au menu"
     echo ""
     
     while true; do
-        echo -n "Choisir un champ à éditer (1-9) : "
+        echo -n "Choisir un champ à éditer (1-10) : "
         read -r choix_champ
         
         case $choix_champ in
@@ -452,11 +576,23 @@ editer_candidature() {
                 done
                 ;;
             9)
+                echo -n "Nouvelle URL de l'offre (ex: https://www.seloger.com/..., laisser vide pour supprimer) : "
+                read -r nouvelle_valeur
+                local temp_file=$(mktemp)
+                if [ -z "$nouvelle_valeur" ]; then
+                    jq ".candidatures |= map(if .id == \"$id_selection\" then .url_offre = null else . end)" "$DATA_FILE" > "$temp_file"
+                else
+                    jq ".candidatures |= map(if .id == \"$id_selection\" then .url_offre = \"$nouvelle_valeur\" else . end)" "$DATA_FILE" > "$temp_file"
+                fi
+                mv "$temp_file" "$DATA_FILE"
+                log_success "URL de l'offre mise à jour"
+                ;;
+            10)
                 log_info "Retour au menu principal"
                 return
                 ;;
             *)
-                log_error "Option invalide (1-9)"
+                log_error "Option invalide (1-10)"
                 ;;
         esac
         
@@ -464,6 +600,15 @@ editer_candidature() {
     done
 }
 
+
+# Valider l'URL
+valider_url() {
+    local url=$1
+    if [[ $url =~ ^https?:// ]]; then
+        return 0
+    fi
+    return 1
+}
 # Mettre à jour le statut d'une candidature
 mettre_a_jour_statut() {
     log_info "=== Mettre à jour le statut ==="
@@ -545,6 +690,15 @@ mettre_a_jour_statut() {
     log_success "Statut mis à jour : $nouveau_statut"
 }
 
+
+# Valider l'URL
+valider_url() {
+    local url=$1
+    if [[ $url =~ ^https?:// ]]; then
+        return 0
+    fi
+    return 1
+}
 # Mettre à jour les infos de visite
 mettre_a_jour_visite() {
     log_info "=== Mettre à jour les infos de visite ==="
@@ -632,6 +786,15 @@ mettre_a_jour_visite() {
     log_success "Informations de visite mises à jour"
 }
 
+
+# Valider l'URL
+valider_url() {
+    local url=$1
+    if [[ $url =~ ^https?:// ]]; then
+        return 0
+    fi
+    return 1
+}
 # Générer la page HTML
 generer_html() {
     log_info "Génération de la page HTML..."
@@ -1492,6 +1655,15 @@ with open('$temp_historique', 'w') as f:
     fi
 }
 
+
+# Valider l'URL
+valider_url() {
+    local url=$1
+    if [[ $url =~ ^https?:// ]]; then
+        return 0
+    fi
+    return 1
+}
 # Menu principal
 menu_principal() {
     while true; do
@@ -1534,10 +1706,28 @@ menu_principal() {
     done
 }
 
+
+# Valider l'URL
+valider_url() {
+    local url=$1
+    if [[ $url =~ ^https?:// ]]; then
+        return 0
+    fi
+    return 1
+}
 # Lancer le script
 main() {
     init_json
     menu_principal
 }
 
+
+# Valider l'URL
+valider_url() {
+    local url=$1
+    if [[ $url =~ ^https?:// ]]; then
+        return 0
+    fi
+    return 1
+}
 main "$@"
