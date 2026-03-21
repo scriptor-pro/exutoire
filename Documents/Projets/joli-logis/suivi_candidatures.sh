@@ -301,7 +301,11 @@ ajouter_candidature() {
     # URL de l'offre
     echo -n "URL de l'offre (ex: https://www.seloger.com/..., optionnel) : "
     read -r url_offre
-    
+
+    # Notes
+    echo -n "Notes (optionnel) : "
+    read -r notes
+
     # Créer l'objet candidature
     local id=$(generer_id)
     local date_creation=$(date '+%d-%m-%Y %H:%M:%S')
@@ -315,6 +319,7 @@ ajouter_candidature() {
     local email_contact_json=$([ -z "$email_contact" ] && echo "null" || echo "\"$email_contact\"")
     local tel_contact_json=$([ -z "$tel_contact" ] && echo "null" || echo "\"$tel_contact\"")
     local url_offre_json=$([ -z "$url_offre" ] && echo "null" || echo "\"$url_offre\"")
+    local notes_json=$([ -z "$notes" ] && echo "null" || echo "\"$notes\"")
     
     local candidature=$(cat <<EOF
 {
@@ -325,6 +330,7 @@ ajouter_candidature() {
   "visite_date": "$([ -z "$visite_date" ] && echo "" || echo "$visite_date")",
   "visite_heure": "$([ -z "$visite_heure" ] && echo "" || echo "$visite_heure")",
   "url_offre": $url_offre_json,
+  "notes": $notes_json,
   "contact": {
     "nom": $nom_contact_json,
     "email": $email_contact_json,
@@ -429,11 +435,12 @@ editer_candidature() {
     echo "7) Email"
     echo "8) Téléphone"
     echo "9) URL de l'offre"
-    echo "10) Retour au menu"
+    echo "10) Notes"
+    echo "11) Retour au menu"
     echo ""
-    
+
     while true; do
-        echo -n "Choisir un champ à éditer (1-10) : "
+        echo -n "Choisir un champ à éditer (1-11) : "
         read -r choix_champ
         
         case $choix_champ in
@@ -588,11 +595,23 @@ editer_candidature() {
                 log_success "URL de l'offre mise à jour"
                 ;;
             10)
+                echo -n "Nouvelles notes (laisser vide pour supprimer) : "
+                read -r nouvelle_valeur
+                local temp_file=$(mktemp)
+                if [ -z "$nouvelle_valeur" ]; then
+                    jq ".candidatures |= map(if .id == \"$id_selection\" then .notes = null else . end)" "$DATA_FILE" > "$temp_file"
+                else
+                    jq ".candidatures |= map(if .id == \"$id_selection\" then .notes = \"$nouvelle_valeur\" else . end)" "$DATA_FILE" > "$temp_file"
+                fi
+                mv "$temp_file" "$DATA_FILE"
+                log_success "Notes mises à jour"
+                ;;
+            11)
                 log_info "Retour au menu principal"
                 return
                 ;;
             *)
-                log_error "Option invalide (1-10)"
+                log_error "Option invalide (1-11)"
                 ;;
         esac
         
@@ -1605,6 +1624,7 @@ with open('$temp_historique', 'w') as f:
     mkdir -p surge_deploy
     cp "$HTML_FILE" surge_deploy/
     cp "$temp_historique" surge_deploy/historique.html
+    cp "$DATA_FILE" surge_deploy/candidatures.json
     rm -f "$temp_historique"
     
     log_success "Page historique générée : historique.html"
