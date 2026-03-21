@@ -10,7 +10,7 @@
             padding: 0;
             box-sizing: border-box;
         }
-        
+
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
@@ -20,7 +20,7 @@
             align-items: center;
             padding: 20px;
         }
-        
+
         .login-container {
             background: white;
             padding: 40px;
@@ -32,26 +32,26 @@
             flex-direction: column;
             gap: 20px;
         }
-        
+
         .login-container h1 {
             text-align: center;
             color: #333;
             margin-bottom: 10px;
         }
-        
+
         .login-container p {
             text-align: center;
             color: #666;
             font-size: 0.9em;
             margin-bottom: 20px;
         }
-        
+
         .login-form {
             display: flex;
             flex-direction: column;
             gap: 15px;
         }
-        
+
         .login-form input {
             padding: 12px;
             border: 2px solid #ddd;
@@ -59,12 +59,12 @@
             font-size: 1em;
             transition: border-color 0.3s;
         }
-        
+
         .login-form input:focus {
             outline: none;
             border-color: #667eea;
         }
-        
+
         .login-form button {
             padding: 12px;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
@@ -76,66 +76,27 @@
             cursor: pointer;
             transition: transform 0.2s;
         }
-        
+
         .login-form button:hover {
             transform: scale(1.02);
         }
-        
+
         .login-form button:active {
             transform: scale(0.98);
         }
-        
+
         .error-message {
             color: #dc3545;
             text-align: center;
             font-size: 0.9em;
             display: none;
         }
-        
+
         .dashboard {
             display: none;
+            width: 100%;
         }
-    </style>
-</head>
-<body>
-    <div id="loginScreen" class="login-container">
-        <h1>🏠 Joli Logis</h1>
-        <p>Suivi des Candidatures Immobilières</p>
-        <form class="login-form" onsubmit="checkPassword(event)">
-            <input 
-                type="password" 
-                id="passwordInput" 
-                placeholder="Mot de passe" 
-                autocomplete="off"
-            />
-            <button type="submit">Accéder</button>
-            <div class="error-message" id="errorMessage">
-                Mot de passe incorrect
-            </div>
-        </form>
-    </div>
-    
-    <div id="dashboardScreen" class="dashboard">
-        <!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Suivi des Candidatures Immobilières</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-            padding: 20px;
-        }
-        
+
         .container {
             max-width: 1200px;
             margin: 0 auto;
@@ -144,24 +105,24 @@
             box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
             overflow: hidden;
         }
-        
+
         .header {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
             padding: 40px 20px;
             text-align: center;
         }
-        
+
         .header h1 {
             font-size: 2.5em;
             margin-bottom: 10px;
         }
-        
+
         .header p {
             font-size: 1.1em;
             opacity: 0.9;
         }
-        
+
         .stats {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
@@ -169,7 +130,7 @@
             padding: 30px 20px;
             background: #f8f9fa;
         }
-        
+
         .stat-card {
             background: white;
             padding: 20px;
@@ -178,62 +139,80 @@
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
             border-left: 4px solid;
         }
-        
+
         .stat-card.pas-envoye {
             border-color: #6c757d;
         }
-        
+
         .stat-card.envoye {
             border-color: #007bff;
         }
-        
+
         .stat-card.en-attente {
             border-color: #ffc107;
         }
-        
+
         .stat-card.negative {
             border-color: #dc3545;
         }
-        
+
         .stat-card.positive {
             border-color: #28a745;
         }
-        
+
         .stat-card .number {
             font-size: 2em;
             font-weight: bold;
             color: #333;
         }
-        
+
         .stat-card .label {
             color: #666;
             font-size: 0.9em;
             margin-top: 5px;
         }
-        
+
+        .nav-bar {
+            background: #f8f9fa;
+            padding: 15px 20px;
+            text-align: center;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .nav-bar a {
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 600;
+            margin: 0 15px;
+        }
+
+        .nav-bar a:hover {
+            text-decoration: underline;
+        }
+
         .content {
             padding: 30px 20px;
         }
-        
+
         .content h2 {
             color: #333;
             margin-bottom: 20px;
             font-size: 1.8em;
         }
-        
+
         .table-wrapper {
             overflow-x: auto;
         }
-        
+
         table {
             width: 100%;
             border-collapse: collapse;
         }
-        
+
         thead {
             background: #f8f9fa;
         }
-        
+
         th {
             padding: 15px;
             text-align: left;
@@ -241,20 +220,20 @@
             color: #333;
             border-bottom: 2px solid #dee2e6;
         }
-        
+
         td {
             padding: 15px;
             border-bottom: 1px solid #dee2e6;
         }
-        
+
         tbody tr {
             transition: background-color 0.2s;
         }
-        
+
         tbody tr:hover {
             background-color: #f8f9fa;
         }
-        
+
         .badge {
             display: inline-block;
             padding: 6px 12px;
@@ -263,32 +242,51 @@
             font-weight: 600;
             text-transform: capitalize;
         }
-        
+
         .badge-pas_envoye {
             background: #e2e3e5;
             color: #383d41;
         }
-        
+
         .badge-envoye {
             background: #cfe2ff;
             color: #084298;
         }
-        
+
         .badge-en_attente {
             background: #fff3cd;
             color: #664d03;
         }
-        
+
         .badge-reponse_negative {
             background: #f8d7da;
             color: #842029;
         }
-        
+
         .badge-reponse_positive {
             background: #d1e7dd;
             color: #0f5132;
         }
-        
+
+        .link-btn {
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.2s;
+        }
+
+        .link-btn:hover {
+            color: #764ba2;
+        }
+
+        .notes-cell {
+            max-width: 200px;
+            word-wrap: break-word;
+            white-space: normal;
+            font-size: 0.9em;
+            color: #555;
+        }
+
         .footer {
             background: #f8f9fa;
             padding: 20px;
@@ -296,20 +294,20 @@
             color: #666;
             font-size: 0.9em;
         }
-        
+
         @media (max-width: 768px) {
             .header h1 {
                 font-size: 1.8em;
             }
-            
+
             .stats {
                 grid-template-columns: repeat(2, 1fr);
             }
-            
+
             table {
                 font-size: 0.9em;
             }
-            
+
             th, td {
                 padding: 10px;
             }
@@ -317,73 +315,90 @@
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="header">
-            <h1>🏠 Suivi de mes Candidatures</h1>
-            <p>Gestion centralisée de vos recherches immobilières</p>
-        </div>
-        
-        <div class="stats">
-            <div class="stat-card pas-envoye">
-                <div class="number">2</div>
-                <div class="label">Pas envoyées</div>
+    <div id="loginScreen" class="login-container">
+        <h1>🏠 Joli Logis</h1>
+        <p>Suivi des Candidatures Immobilières</p>
+        <form class="login-form" onsubmit="checkPassword(event)">
+            <input
+                type="password"
+                id="passwordInput"
+                placeholder="Mot de passe"
+                autocomplete="off"
+            />
+            <button type="submit">Accéder</button>
+            <div class="error-message" id="errorMessage">
+                Mot de passe incorrect
             </div>
-            <div class="stat-card envoye">
-                <div class="number">0</div>
-                <div class="label">Envoyées</div>
-            </div>
-            <div class="stat-card en-attente">
-                <div class="number">1</div>
-                <div class="label">En attente</div>
-            </div>
-            <div class="stat-card negative">
-                <div class="number">1</div>
-                <div class="label">Refusées</div>
-            </div>
-            <div class="stat-card positive">
-                <div class="number">0</div>
-                <div class="label">Acceptées</div>
-            </div>
-        </div>
-        
-        <div class="content">
-            <h2>Détail des candidatures</h2>
-            <div class="table-wrapper">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Localisation</th>
-                            <th>Loyer</th>
-                            <th>Visite</th>
-                            <th>Date/Heure</th>
-                            <th>Contact</th>
-                            <th>Email</th>
-                            <th>Statut</th>
-                        </tr>
-                    </thead>
-                     <tbody>
-                        <tr class='statut-pas_envoye'><td>Anderlecht</td><td>750€</td><td>non</td><td><em>-</em></td><td>Prop. Privé</td><td><em>-</em></td><td><span class='badge badge-pas_envoye'>pas_envoye</span></td></tr>
-<tr class='statut-pas_envoye'><td>Anderlecht</td><td>750€</td><td>non</td><td><em>-</em></td><td>Propriétaire privé</td><td><em>-</em></td><td><span class='badge badge-pas_envoye'>pas_envoye</span></td></tr>
-<tr class='statut-reponse_negative'><td>Supprime-City</td><td>1500€</td><td>oui</td><td>25-03-2026 14:30</td><td>Agence Dupont</td><td>contact@agence-dupont.fr</td><td><span class='badge badge-reponse_negative'>reponse_negative</span></td></tr>
-<tr class='statut-en_attente'><td>Lyon 6e</td><td>1200€</td><td>non</td><td>28-03-2026 10:00</td><td>Marie Dupont</td><td>marie@example.com</td><td><span class='badge badge-en_attente'>en_attente</span></td></tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-        
-        <div class="footer">
-            <p>Généré le: 19-03-2026 à 12:33:11</p>
-        </div>
+        </form>
     </div>
-</body>
-</html>
 
+    <div id="dashboardScreen" class="dashboard">
+        <div class="container">
+            <div class="header">
+                <h1>🏠 Suivi de mes Candidatures</h1>
+                <p>Gestion centralisée de vos recherches immobilières</p>
+            </div>
+
+            <div class="nav-bar">
+                <a href="#" onclick="showDashboard(event)">📊 Dashboard</a>
+                <a href="surge_deploy/historique.html">📋 Historique (Refusées)</a>
+            </div>
+
+            <div class="stats">
+                <div class="stat-card pas-envoye">
+                    <div class="number" id="stat-pas_envoye">0</div>
+                    <div class="label">Pas envoyées</div>
+                </div>
+                <div class="stat-card envoye">
+                    <div class="number" id="stat-envoye">0</div>
+                    <div class="label">Envoyées</div>
+                </div>
+                <div class="stat-card en-attente">
+                    <div class="number" id="stat-en_attente">0</div>
+                    <div class="label">En attente</div>
+                </div>
+                <div class="stat-card negative">
+                    <div class="number" id="stat-reponse_negative">0</div>
+                    <div class="label">Refusées</div>
+                </div>
+                <div class="stat-card positive">
+                    <div class="number" id="stat-reponse_positive">0</div>
+                    <div class="label">Acceptées</div>
+                </div>
+            </div>
+
+            <div class="content">
+                <h2>Détail des candidatures</h2>
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Localisation</th>
+                                <th>Loyer</th>
+                                <th>Visite</th>
+                                <th>Date/Heure</th>
+                                <th>Contact</th>
+                                <th>Lien</th>
+                                <th>Notes</th>
+                                <th>Statut</th>
+                            </tr>
+                        </thead>
+                         <tbody id="candidaturesBody">
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="footer">
+                <p id="footerDate">Généré le: --</p>
+            </div>
+        </div>
     </div>
-    
+
     <script>
         // Mot de passe haché en SHA-256
         const PASSWORD_HASH = "2772fe99324c8400f7223c23e6137cfb36c09ab22d8d560277c8fae105ac4989";
-        
+
         // Fonction pour hasher avec SHA-256
         async function sha256(str) {
             const buf = new TextEncoder().encode(str);
@@ -392,18 +407,19 @@
             const hashHex = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
             return hashHex;
         }
-        
+
         // Vérifier le mot de passe
         async function checkPassword(event) {
             event.preventDefault();
             const password = document.getElementById('passwordInput').value;
             const hash = await sha256(password);
-            
+
             if (hash === PASSWORD_HASH) {
                 // Mot de passe correct
                 document.getElementById('loginScreen').style.display = 'none';
                 document.getElementById('dashboardScreen').style.display = 'block';
-                sessionStorage.setItem('authenticated', 'true');
+                localStorage.setItem('authenticated', 'true');
+                loadCandidatures();
             } else {
                 // Mot de passe incorrect
                 document.getElementById('errorMessage').style.display = 'block';
@@ -411,12 +427,102 @@
                 document.getElementById('passwordInput').focus();
             }
         }
-        
+
+        // Charger les candidatures
+        async function loadCandidatures() {
+            try {
+                const response = await fetch('candidatures.json');
+                const data = await response.json();
+                renderCandidatures(data.candidatures);
+                updateStats(data.candidatures);
+                updateFooter();
+            } catch (error) {
+                console.error('Erreur lors du chargement des candidatures:', error);
+                document.getElementById('candidaturesBody').innerHTML =
+                    '<tr><td colspan="8" style="text-align: center; color: #dc3545;">Erreur lors du chargement des données</td></tr>';
+            }
+        }
+
+        // Afficher les candidatures
+        function renderCandidatures(candidatures) {
+            const tbody = document.getElementById('candidaturesBody');
+            tbody.innerHTML = '';
+
+            candidatures.forEach(cand => {
+                const row = document.createElement('tr');
+                row.className = `statut-${cand.statut_actuel}`;
+
+                // Lien
+                let lienHtml = '-';
+                if (cand.url_offre) {
+                    lienHtml = `<a href="${cand.url_offre}" target="_blank" class="link-btn">[lien]</a>`;
+                }
+
+                // Notes
+                let notesHtml = cand.notes || '-';
+
+                // Visite
+                let visiteHtml = cand.visite_effectuee;
+                if (cand.visite_effectuee === 'oui' && cand.visite_date) {
+                    visiteHtml += ` (${cand.visite_date}${cand.visite_heure ? ' ' + cand.visite_heure : ''})`;
+                }
+
+                row.innerHTML = `
+                    <td>${cand.localisation}</td>
+                    <td>${cand.loyer}€</td>
+                    <td>${visiteHtml}</td>
+                    <td>${cand.visite_date && cand.visite_heure ? cand.visite_date + ' ' + cand.visite_heure : '-'}</td>
+                    <td>${cand.contact.nom || '-'}</td>
+                    <td>${lienHtml}</td>
+                    <td class="notes-cell">${notesHtml}</td>
+                    <td><span class='badge badge-${cand.statut_actuel}'>${cand.statut_actuel.replace(/_/g, ' ')}</span></td>
+                `;
+                tbody.appendChild(row);
+            });
+        }
+
+        // Mettre à jour les statistiques
+        function updateStats(candidatures) {
+            const stats = {
+                pas_envoye: 0,
+                envoye: 0,
+                en_attente: 0,
+                reponse_negative: 0,
+                reponse_positive: 0
+            };
+
+            candidatures.forEach(cand => {
+                if (stats[cand.statut_actuel] !== undefined) {
+                    stats[cand.statut_actuel]++;
+                }
+            });
+
+            Object.keys(stats).forEach(key => {
+                const elem = document.getElementById(`stat-${key}`);
+                if (elem) {
+                    elem.textContent = stats[key];
+                }
+            });
+        }
+
+        // Mettre à jour la date du footer
+        function updateFooter() {
+            const now = new Date();
+            const dateStr = now.toLocaleDateString('fr-FR') + ' à ' + now.toLocaleTimeString('fr-FR');
+            document.getElementById('footerDate').textContent = 'Généré le: ' + dateStr;
+        }
+
+        // Fonction pour afficher le dashboard
+        function showDashboard(event) {
+            event.preventDefault();
+        }
+
         // Vérifier si l'utilisateur est déjà authentifié
         window.addEventListener('load', function() {
-            if (sessionStorage.getItem('authenticated') === 'true') {
+            if (localStorage.getItem('authenticated') === 'true') {
                 document.getElementById('loginScreen').style.display = 'none';
                 document.getElementById('dashboardScreen').style.display = 'block';
+                loadCandidatures();
             }
         });
     </script>

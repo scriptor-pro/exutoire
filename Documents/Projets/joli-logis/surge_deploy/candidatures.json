@@ -1,0 +1,280 @@
+{
+  "candidatures": [
+    {
+      "id": "appart_1710857400_12345",
+      "localisation": "Supprime-City",
+      "loyer": 1500,
+      "visite_effectuee": "oui",
+      "visite_date": "25-03-2026",
+      "visite_heure": "14:30",
+      "contact": {
+        "nom": null,
+        "email": "contact@agence-dupont.fr",
+        "telephone": "04 79 47 87 08"
+      },
+      "date_creation": "19-03-2026 12:00:00",
+      "statut_actuel": "reponse_negative",
+      "historique_statuts": [
+        {
+          "statut": "pas_envoye",
+          "date": "19-03-2026 12:00:00",
+          "notes": "Candidature créée"
+        },
+        {
+          "statut": "envoye",
+          "date": "19-03-2026 13:00:00",
+          "notes": "Candidature envoyée"
+        },
+        {
+          "statut": "reponse_negative",
+          "date": "19-03-2026 12:33:02",
+          "notes": "Statut mis à jour"
+        }
+      ]
+    },
+    {
+      "id": "appart_1710857500_54321",
+      "localisation": "Lyon 6e",
+      "loyer": 1200,
+      "visite_effectuee": "non",
+      "visite_date": "28-03-2026",
+      "visite_heure": "10:00",
+      "contact": {
+        "nom": "Marie Dupont",
+        "email": "marie@example.com",
+        "telephone": "+32479478708"
+      },
+      "date_creation": "19-03-2026 11:00:00",
+      "statut_actuel": "reponse_negative",
+      "historique_statuts": [
+        {
+          "statut": "pas_envoye",
+          "date": "19-03-2026 11:00:00",
+          "notes": "Candidature créée"
+        },
+        {
+          "statut": "envoye",
+          "date": "19-03-2026 12:00:00",
+          "notes": "Candidature envoyée"
+        },
+        {
+          "statut": "en_attente",
+          "date": "19-03-2026 14:00:00",
+          "notes": "En attente de réponse"
+        },
+        {
+          "statut": "reponse_negative",
+          "date": "19-03-2026 12:33:13",
+          "notes": "Statut mis à jour"
+        }
+      ]
+    },
+    {
+      "id": "appart_1773919138_28699",
+      "localisation": "Anderlecht",
+      "loyer": 750,
+      "visite_effectuee": "non",
+      "visite_date": "",
+      "visite_heure": "",
+      "contact": {
+        "nom": "Propriétaire privé",
+        "email": null,
+        "telephone": null
+      },
+      "date_creation": "19-03-2026 12:18:58",
+      "statut_actuel": "pas_envoye",
+      "historique_statuts": [
+        {
+          "statut": "pas_envoye",
+          "date": "19-03-2026 12:18:58",
+          "notes": "Candidature créée"
+        },
+        {
+          "statut": "envoye",
+          "date": "19-03-2026 12:33:38",
+          "notes": "Statut mis à jour"
+        },
+        {
+          "statut": "pas_envoye",
+          "date": "19-03-2026 13:05:51",
+          "notes": "Statut mis à jour"
+        }
+      ]
+    },
+    {
+      "id": "appart_1773919385_32565",
+      "localisation": "Anderlecht",
+      "loyer": 745,
+      "visite_effectuee": "non",
+      "visite_date": "",
+      "visite_heure": "",
+      "contact": {
+        "nom": "Prop. Privé",
+        "email": null,
+        "telephone": "+32479478708"
+      },
+      "date_creation": "19-03-2026 12:23:05",
+      "statut_actuel": "reponse_negative",
+      "historique_statuts": [
+        {
+          "statut": "pas_envoye",
+          "date": "19-03-2026 12:23:05",
+          "notes": "Candidature créée"
+        },
+        {
+          "statut": "reponse_negative",
+          "date": "19-03-2026 12:33:55",
+          "notes": "Statut mis à jour"
+        }
+      ]
+    },
+    {
+      "id": "appart_1773921500_22229",
+      "localisation": "rue Achille Detienne 67",
+      "loyer": 750,
+      "visite_effectuee": "oui",
+      "visite_date": "",
+      "visite_heure": "",
+      "contact": {
+        "nom": "Immo2a.be",
+        "email": null,
+        "telephone": null
+      },
+      "date_creation": "19-03-2026 12:58:20",
+      "statut_actuel": "envoye",
+      "historique_statuts": [
+        {
+          "statut": "pas_envoye",
+          "date": "19-03-2026 12:58:20",
+          "notes": "Candidature créée"
+        },
+        {
+          "statut": "envoye",
+          "date": "19-03-2026 13:01:11",
+          "notes": "Statut mis à jour"
+        }
+      ]
+    },
+    {
+      "id": "appart_1773923080_8588",
+      "localisation": "Test URL",
+      "loyer": 800,
+      "visite_effectuee": "non",
+      "visite_date": "",
+      "visite_heure": "",
+      "url_offre": "https://www.seloger.com/test-offre",
+      "contact": {
+        "nom": "Test Contact",
+        "email": "test@example.com",
+        "telephone": "06 12 34 56 78"
+      },
+      "date_creation": "19-03-2026 13:24:40",
+      "statut_actuel": "reponse_negative",
+      "historique_statuts": [
+        {
+          "statut": "pas_envoye",
+          "date": "19-03-2026 13:24:40",
+          "notes": "Candidature créée"
+        },
+        {
+          "statut": "reponse_negative",
+          "date": "20-03-2026 11:26:19",
+          "notes": "(test)"
+        }
+      ]
+    },
+    {
+      "id": "appart_1774002296_14528",
+      "localisation": "rue Blaes",
+      "loyer": 690,
+      "visite_effectuee": "non",
+      "visite_date": "",
+      "visite_heure": "",
+      "url_offre": "https://www.immoweb.be/fr/annonce/studio/a-louer/bruxelles/1000/21434066",
+      "contact": {
+        "nom": null,
+        "email": null,
+        "telephone": null
+      },
+      "date_creation": "20-03-2026 11:24:56",
+      "statut_actuel": "pas_envoye",
+      "historique_statuts": [
+        {
+          "statut": "pas_envoye",
+          "date": "20-03-2026 11:24:56",
+          "notes": "Candidature créée"
+        }
+      ]
+    },
+    {
+      "id": "appart_1774007245_18974",
+      "localisation": "179 rue Blaes",
+      "loyer": 690,
+      "visite_effectuee": "non",
+      "visite_date": "",
+      "visite_heure": "",
+      "url_offre": null,
+      "contact": {
+        "nom": "privé",
+        "email": null,
+        "telephone": null
+      },
+      "date_creation": "20-03-2026 12:47:25",
+      "statut_actuel": "pas_envoye",
+      "historique_statuts": [
+        {
+          "statut": "pas_envoye",
+          "date": "20-03-2026 12:47:25",
+          "notes": "Candidature créée"
+        }
+      ]
+    },
+    {
+      "id": "appart_1774091287_12655",
+      "localisation": "Quai du Chantier 7, 1000 Bxl",
+      "loyer": 530,
+      "visite_effectuee": "non",
+      "visite_date": "",
+      "visite_heure": "",
+      "url_offre": "https://www.zimmo.be/fr/bruxelles-1000/a-louer/appartement/LM7LQ/",
+      "contact": {
+        "nom": "privé anonyme",
+        "email": null,
+        "telephone": null
+      },
+      "date_creation": "21-03-2026 12:08:07",
+      "statut_actuel": "pas_envoye",
+      "historique_statuts": [
+        {
+          "statut": "pas_envoye",
+          "date": "21-03-2026 12:08:07",
+          "notes": "Candidature créée"
+        }
+      ]
+    },
+    {
+      "id": "appart_1774092730_30739",
+      "localisation": "21 avenue Nellie Melba - Anderlecht",
+      "loyer": 745,
+      "visite_effectuee": "non",
+      "visite_date": "21-03-2026",
+      "visite_heure": "15:15",
+      "url_offre": "https://www.immoweb.be/fr/annonce/appartement/a-louer/anderlecht/1070/21431846",
+      "notes": null,
+      "contact": {
+        "nom": "Nicole Sterkendries",
+        "email": null,
+        "telephone": null
+      },
+      "date_creation": "21-03-2026 12:32:10",
+      "statut_actuel": "pas_envoye",
+      "historique_statuts": [
+        {
+          "statut": "pas_envoye",
+          "date": "21-03-2026 12:32:10",
+          "notes": "Candidature créée"
+        }
+      ]
+    }
+  ]
+}
